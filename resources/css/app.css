@@ -1,0 +1,51 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "./calendar.css";
+@import "./select2.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: Futura-lt-book;
+        src: url(../fonts/futura_lt_book.eot);
+        src: url(../fonts/futura_lt_book.eot?#iefix) format("embedded-opentype"),
+            url(../fonts/futura_lt_book.woff) format("woff"),
+            url(../fonts/futura_lt_book.ttf) format("truetype");
+        font-weight: 500;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: Futura-lt-bold;
+        src: url(../fonts/FuturaLT-Bold.eot);
+        src: url(../fonts/FuturaLT-Bold.eot?#iefix) format("embedded-opentype"),
+            url(../fonts/FuturaLT-Bold.woff) format("woff"),
+            url(../fonts/FuturaLT-Bold.ttf) format("truetype");
+        font-weight: 700;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: helveticaregularregular;
+        src: url(../fonts/helveticaregular-webfont.eot);
+        src: url(../fonts/helveticaregular-webfont.eot?#iefix)
+                format("embedded-opentype"),
+            url(../fonts/helveticaregular-webfont.woff) format("woff"),
+            url(../fonts/helveticaregular-webfont.ttf) format("truetype"),
+            url(../fonts/helveticaregular-webfont.svg#helveticaregularregular)
+                format("svg");
+        font-weight: 400;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: Myriad Pro;
+        src: url(../fonts/MyriadPro-Regular.eot);
+        src: url(../fonts/MyriadPro-Regular.eot?#iefix)
+                format("embedded-opentype"),
+            url(../fonts/MyriadPro-Regular.woff) format("woff"),
+            url(../fonts/MyriadPro-Regular.ttf) format("truetype"),
+            url(../fonts/MyriadPro-Regular.svg#MyriadPro-Regular) format("svg");
+        font-weight: 400;
+        font-style: normal;
+    }
+}
