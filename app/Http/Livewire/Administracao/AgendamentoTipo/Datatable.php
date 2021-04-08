@@ -7,12 +7,14 @@ use App\Models\Administracao\AgendamentoTipo;
 
 class Datatable extends Component
 {
+    public $tipos = [];
+
+    public function mount(){
+        $this->tipos = AgendamentoTipo::all();
+    }
 
     public function render()
     {
-        return view('livewire.administracao.agendamento-tipo.datatable', [
-            'tipos' => AgendamentoTipo::all(),
-        ]);
+        return view('livewire.administracao.agendamento-tipo.datatable');
     }
-
 }

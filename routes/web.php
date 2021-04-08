@@ -17,8 +17,15 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::prefix('administracao')->group(function () {
+Route::prefix('administracao')->name('adm.')->group(function () {
+
     Route::get('/tipodeagendamento', function () {
         return view('pages.administracao.tipodeagendamento');
     })->name('tipodeagendamento');
+
+    Route::get('/checklist', function () {
+        return view('pages.administracao.checklistitens');
+    })->name('checklist');
+
+
 });

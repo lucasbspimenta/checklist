@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class AgendamentoTipo extends Model
 {
-    protected $fillable = ['nome','descricao'];
+    protected $fillable = ['nome','descricao', 'situacao', 'cor'];
 }

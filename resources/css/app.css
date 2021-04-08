@@ -1,6 +1,11 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
+@import "~jquery-modal/jquery.modal.min.css";
+@import "~sweetalert2/dist/sweetalert2.min.css";
+@import "~toastr/build/toastr.min.css";
 @import "./calendar.css";
 @import "./select2.css";
+@import "./datatables.css";
+@import "./pace.css";
 
 @tailwind base;
 @tailwind components;
@@ -48,4 +53,9 @@
         font-weight: 400;
         font-style: normal;
     }
+}
+
+
+[x-cloak] {
+    display: none;
 }

@@ -18,6 +18,7 @@ class CreateAgendamentoTiposTable extends Migration
             $table->string('nome');
             $table->string('descricao')->nullable();
             $table->boolean('situacao')->default(true);
+            $table->string('cor', 7)->nullable();
 
             $table->timestamps();
         });
