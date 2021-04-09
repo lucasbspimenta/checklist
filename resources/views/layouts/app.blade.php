@@ -17,9 +17,9 @@
         <script src="{{ asset('js/vendor.js') }}"></script>
         <script src="{{ asset('js/app.js') }}"></script>
     </head>
-    <body class="bg-[#FCFCFC] h-full">
+    <body class="bg-[#FCFCFC] h-teladisponivel">
         @include('layouts.header')
-        <main class="mt-16">
+        <main class="h-full mt-16">
             @yield('content')
         </main>
         @stack('scripts')

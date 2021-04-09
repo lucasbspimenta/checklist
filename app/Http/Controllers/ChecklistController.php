@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Administracao\Checklist;
+use App\Models\Checklist;
 use Illuminate\Http\Request;
 
 class ChecklistController extends Controller
@@ -41,7 +41,7 @@ class ChecklistController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Administracao\Checklist  $checklist
+     * @param  \App\Models\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
     public function show(Checklist $checklist)
@@ -52,7 +52,7 @@ class ChecklistController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Administracao\Checklist  $checklist
+     * @param  \App\Models\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
     public function edit(Checklist $checklist)
@@ -64,7 +64,7 @@ class ChecklistController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Administracao\Checklist  $checklist
+     * @param  \App\Models\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Checklist $checklist)
@@ -75,7 +75,7 @@ class ChecklistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Administracao\Checklist  $checklist
+     * @param  \App\Models\Checklist  $checklist
      * @return \Illuminate\Http\Response
      */
     public function destroy(Checklist $checklist)

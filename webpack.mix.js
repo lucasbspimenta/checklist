@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .extract(['tui-calendar', 'moment', 'jquery','pikaday','datatables','jquery-modal'])
+    .extract(['tui-calendar', 'moment', 'jquery','pikaday','datatables','jquery-modal','fullcalendar'])
     .postCss('resources/css/app.css', 'public/css', [
         require("@tailwindcss/jit"),
     ]);

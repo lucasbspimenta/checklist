@@ -59,3 +59,10 @@
 [x-cloak] {
     display: none;
 }
+
+.h-teladisponivel {
+    height: calc(100vh - (4rem + 29px)); 
+    height: -o-calc(100vh - (4rem + 29px)); /* opera */
+    height: -webkit-calc(100vh - (4rem + 29px)); /* google, safari */
+    height: -moz-calc(100vh - (4rem + 29px)); 
+}

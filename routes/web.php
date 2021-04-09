@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AgendaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda', 'update' => 'agenda_update']);
+
 Route::prefix('administracao')->name('adm.')->group(function () {
 
     Route::get('/tipodeagendamento', function () {
@@ -26,6 +29,5 @@ Route::prefix('administracao')->name('adm.')->group(function () {
     Route::get('/checklist', function () {
         return view('pages.administracao.checklistitens');
     })->name('checklist');
-
 
 });
