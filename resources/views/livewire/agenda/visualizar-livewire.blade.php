@@ -42,7 +42,7 @@
             <div class="flex justify-between pt-2">
                 <button wire:click.prevent="botaoCancelar" wire:loading.attr="disabled" class="border-solid border border-gray-400 text-sm font-sans bg-caixaCinza bg-opacity-90 text-gray-500 px-3 py-1 hover:bg-opacity-100 focus:outline-none min-w-[75px]" >Fechar</button>
                 <button wire:click.prevent="excluir({{ $agenda->id }})" wire:loading.attr="disabled" class="border-solid border border-red-800 text-sm font-sans bg-red-800 bg-opacity-90 text-white px-3 py-1 hover:bg-opacity-100 focus:outline-none min-w-[75px]">Remover</button>
-                <button wire:loading.attr="disabled" class="border-solid border border-caixaLaranja text-sm font-sans bg-caixaLaranja bg-opacity-90 text-white px-3 py-1 hover:bg-opacity-100 focus:outline-none min-w-[75px]" >Checklist</button>
+                <a href="{{ route('checklist.edit', ($agenda->id ?? 'novo')) }}" wire:loading.attr="disabled" class="border-solid border border-caixaLaranja text-sm font-sans bg-caixaLaranja bg-opacity-90 text-white px-3 py-1 hover:bg-opacity-100 focus:outline-none min-w-[75px] leading-6" >Checklist</a>
                 
             </div>
         </form>

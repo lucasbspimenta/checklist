@@ -1,1 +1,2 @@
 [06-Apr-2021 12:18:28 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\livewire\livewire\src\LivewireManager.php on line 66
+[12-Apr-2021 19:16:52 America/Sao_Paulo] PHP Fatal error:  Trait 'App\Http\Livewire\Checklist\WithFileUploads' not found in C:\inetpub\wwwroot\app\Http\Livewire\Checklist\FotosUpload.php on line 9

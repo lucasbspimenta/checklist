@@ -9,16 +9,16 @@ class ChecklistItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome','descricao', 'situacao', 'cor', 'checklist_items_id'];
+    protected $fillable = ['nome','descricao', 'situacao', 'cor', 'item_pai_id', 'foto'];
 
     public function itensfilhos() {
 
-        return $this->hasMany(ChecklistItem::class, 'checklist_items_id')->with('itensfilhos');
+        return $this->hasMany(ChecklistItem::class, 'item_pai_id')->with('itempai');
     }
 
     public function itempai()
     {
-        return $this->belongsTo(ChecklistItem::class, 'checklist_items_id');
+        return $this->belongsTo(ChecklistItem::class, 'item_pai_id');
     }
 
     public static function boot() {

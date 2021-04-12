@@ -4,82 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Checklist;
 use Illuminate\Http\Request;
+use App\Models\Agenda;
+
+use App\Services\ChecklistServices;
 
 class ChecklistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('pages.checklist');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show(Request $request)
     {
-        //
-    }
+        $agenda = $request->agenda_id != 'novo' ? Agenda::with('checklist')->find($request->agenda_id) : null;
+        $agenda_sem_checklist = [];
+        
+        switch ($request->method()) {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            case 'POST':
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Checklist  $checklist
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Checklist $checklist)
-    {
-        //
-    }
+                ChecklistServices::registrarItens($request);
+                $agenda->checklist->fresh('respostas');
+                $agenda->refresh();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Checklist  $checklist
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Checklist $checklist)
-    {
-        //
-    }
+            break;
+    
+            case 'GET':
+                $agenda_sem_checklist = Agenda::doesntHave('checklist')->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Checklist  $checklist
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Checklist $checklist)
-    {
-        //
-    }
+                if($agenda && !$agenda->checklist->exists)
+                    $agenda->criarChecklist();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Checklist  $checklist
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Checklist $checklist)
-    {
-        //
+            break;
+        }
+
+        return view('pages.checklist-form', compact('agenda','agenda_sem_checklist'));
     }
 }

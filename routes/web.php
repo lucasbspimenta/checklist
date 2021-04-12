@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\ChecklistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,10 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda', 'update' => 'agenda_update']);
+Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda']);
+
+Route::get('/checklist',                                [ChecklistController::class, 'index'])->name('checklist.index');
+Route::match(['get', 'post'],'/checklist/{agenda_id}',  [ChecklistController::class, 'show'])->name('checklist.edit');
 
 Route::prefix('administracao')->name('adm.')->group(function () {
 
@@ -31,3 +35,4 @@ Route::prefix('administracao')->name('adm.')->group(function () {
     })->name('checklist');
 
 });
+

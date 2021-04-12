@@ -22,7 +22,7 @@
                     <label class="block">
                         <span class="text-gray-700">Imóvel</span>
                         <select class="w-full" wire:model.debounce.defer="agenda.imovel_id">
-                            <option value="" disabled >Selecione o imóvel</option>
+                            <option value="" >Selecione o imóvel</option>
                             <option value="1">Ag. Divinópolis</option>
                             <option value="2">Ag. Lucas do Divinópolis</option>
                         </select>
@@ -31,7 +31,7 @@
                     <label class="block">
                         <span class="text-gray-700">Tipo de Agendamento</span>
                         <select class="w-full" wire:model.debounce.defer="agenda.agendamento_tipos_id">
-                                <option value="" disabled >Selecione o tipo de agendamento</option>
+                                <option value="" >Selecione o tipo de agendamento</option>
                             @forelse($tiposagendamentos as $tipo)
                                 <option value="{{ $tipo->id }}">{{ $tipo->nome }}</option>
                             @empty

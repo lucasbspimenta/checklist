@@ -33,7 +33,7 @@
                     />
                     <span class="ml-2">Exibir subitens</span>
                   </label>
-                <button wire:click="adicionarItem" wire:loading.attr="disabled" class="px-3 font-sans text-sm text-white border border-solid border-caixaLaranja bg-caixaLaranja bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" ><i class="fas fa-plus md:mr-2"></i><div class="hidden md:inline-block">Adicionar</div></button>
+                <button onClick="abrirModalChecklist(false)" wire:loading.attr="disabled" class="px-3 font-sans text-sm text-white border border-solid border-caixaLaranja bg-caixaLaranja bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" ><i class="fas fa-plus md:mr-2"></i><div class="hidden md:inline-block">Adicionar</div></button>
             </div>
         </div>
     </nav>
@@ -44,6 +44,7 @@
                     <tr>
                         <th class="px-2 py-2 mb-2 text-sm leading-4 tracking-wider text-left text-blue-500 border-b-2 border-gray-300">Nome</th>
                         <th class="px-2 py-2 text-sm leading-4 tracking-wider text-left text-blue-500 border-b-2 border-gray-300">Descrição</th>
+                        <th class="px-2 py-2 text-sm leading-4 tracking-wider text-left text-blue-500 border-b-2 border-gray-300">Foto</th>
                         <th class="px-2 py-2 text-sm leading-4 tracking-wider text-left text-blue-500 border-b-2 border-gray-300">Subitens</th>
                         <th class="px-2 py-2 text-sm leading-4 tracking-wider text-left text-blue-500 border-b-2 border-gray-300">Situação</th>
                         <th class="px-2 py-2 text-sm leading-4 tracking-wider text-left text-blue-500 border-b-2 border-gray-300">Opções</th>
@@ -62,16 +63,17 @@
                                 @endif
                             </td>
                             <td class="px-2 py-2">{{ $item->descricao }}</td>
+                            <td class="w-1/5 px-2 py-2">{!! ($item->foto == 'S') ? '<div class="text-sm leading-none text-green-600">Sim</div>' : '' !!}</td>
                             <td class="w-1/5 px-2 py-2">
                                 <div class="flex justify-start flex-nowrap">
                                     <span class="items-center table-cell p-1 mr-2 text-sm leading-none text-white bg-blue-400 rounded">
                                         {{ $item->itensFilhos->count() }}
                                     </span>
-                                    <button wire:click="adicionarItem(true, {{ $item->id }})" wire:loading.attr="disabled" class="h-full px-3 font-sans text-sm border text-caixaAzul focus:outline-none" ><i class="fas fa-plus md:mr-1"></i><div class="hidden md:inline-block">Adicionar Subitem</div></button>
+                                    <button onClick="abrirModalChecklist({{ $item->id }}, true)" wire:loading.attr="disabled" class="h-full px-3 font-sans text-sm border text-caixaAzul focus:outline-none" ><i class="fas fa-plus md:mr-1"></i><div class="hidden md:inline-block">Adicionar Subitem</div></button>
                                 </div>
                             </td>
                             <td class="w-1/5 px-2 py-2">
-                                @if ($item->situacao)
+                                @if ($item->situacao == 'A')
                                     <span class="items-center table-cell p-1 text-sm leading-none text-white bg-green-600 rounded">
                                         Ativado
                                     </span>
@@ -84,7 +86,7 @@
                             <td class="w-1/5 px-2 py-2">
                                 <div class="flex flex-nowrap">
                                     <button 
-                                        wire:click="editar({{ $item->id }})"
+                                        onClick="abrirModalChecklist({{ $item->id }})"
                                         wire:loading.attr="disabled"
                                         class="px-3 font-sans text-sm bg-white border border-white border-solid text-caixaAzul hover:border-gray focus:outline-none" >
                                         <i class="fas fa-edit"></i>
@@ -105,9 +107,11 @@
                                         {{ $item_filho->nome }}
                                     </div>
                                 </td>
-                                <td class="px-2 py-2" colspan="2">{{ $item_filho->descricao }}</td>
+                                <td class="px-2 py-2">{{ $item_filho->descricao }}</td>
+                                <td class="w-1/5 px-2 py-2">{!! ($item_filho->foto == 'S') ? '<span class="text-sm leading-none text-green-600">Sim</span>' : '' !!}</td>
+                                <td class="px-2 py-2">-</td>
                                 <td class="w-1/5 px-2 py-2">
-                                    @if ($item_filho->situacao)
+                                    @if ($item_filho->situacao == 'A')
                                         <span class="items-center table-cell p-1 text-sm leading-none text-white bg-green-600 rounded">
                                             Ativado
                                         </span>
@@ -120,7 +124,7 @@
                                 <td class="w-1/5 px-2 py-2">
                                     <div class="flex flex-nowrap">
                                         <button 
-                                            wire:click="editar({{ $item_filho->id }})"
+                                            onClick="abrirModalChecklist({{ $item_filho->id }})"
                                             wire:loading.attr="disabled"
                                             class="px-3 font-sans text-sm bg-white border border-white border-solid text-caixaAzul hover:border-gray focus:outline-none" >
                                             <i class="fas fa-edit"></i>
@@ -140,107 +144,39 @@
             </table>
         </div>
     </div>
-    <div class="@if($exibirModal) blocker @else hide @endif">
-        <div class="w-4/6 p-6 modal" id="modal-atendimento-tipo-form" @if($exibirModal)style="display: inline-block;"@endif>
-            <div class="flex items-center justify-between pb-3">
-                <p class="text-lg text-caixaAzul font-futurabold">Item de Checklist @if($isSubItem) - Subitem @endif</p>
-                <div class="z-50 cursor-pointer" wire:click="botaoCancelar">
-                    <svg class="text-black fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-                    </svg>
-                </div>
-            </div>
-            <form>
-                <div class="mb-2 text-sm">
-                    @if($isSubItem)
-                    <div class="grid grid-flow-col gap-4 mb-4 auto-cols-max text-caixaAzul">
-                        <x-form.input-text label="Item" value="{{ $item_pai->nome }}" placeholder="" readonly></x-form.input-text>
-                        <label class="inline-block">
-                            <span class="text-gray-700">Cor</span>
-                            <input
-                                value="{{ $item_pai->cor }}" 
-                                type="color"
-                                class="block w-16 mt-3 text-sm"
-                                autocomplete="off"
-                                disabled
-                                >
-                        </label>
-                    </div>
-                    @endif
-                    <div class="grid grid-flow-col gap-4 auto-cols-max">
-                        <x-form.input-text label="Nome" wire:model.debounce.lazy="item.nome" placeholder="">
-                            @error('item.nome') <span class="flex items-center mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">{{ $message }}</span>@enderror
-                        </x-form.input-text>
-                        <x-form.input-text type="number" label="Ordenação" wire:model.debounce.lazy="item.ordem" placeholder="">
-                            @error('item.ordem') <span class="flex items-center mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">{{ $message }}</span>@enderror
-                        </x-form.input-text>
-                    </div>
-                    <div class="grid grid-flow-col gap-4 auto-cols-max">
-                        <label class="block">
-                            <span class="block text-gray-700">Situação</span>
-                            <div class="switch switch--horizontal">
-                                <input id="radio-a" type="radio" name="first-switch" value="0" wire:model.debounce.defer="item.situacao"/>
-                                <label for="radio-a">Desativado</label>
-                                <input id="radio-b" type="radio" name="first-switch" value="1" wire:model.debounce.defer="item.situacao"/>
-                                <label for="radio-b">Ativado</label><span class="toggle-outside"><span class="toggle-inside"></span></span>
-                            </div>
-                            @error('item.situacao') <span class="flex items-center mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">{{ $message }}</span>@enderror
-                        </label>
-                        @if(!$isSubItem)
-                        <label class="block">
-                            <span class="text-gray-700">Cor</span>
-                            <input
-                                wire:model.debounce.defer="item.cor" 
-                                type="color"
-                                class="block w-16 mt-3 text-sm"
-                                autocomplete="off"
-                                >
-                                @error('item.cor') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </label>
-                        @endif
-                    </div>
-                    <div class="grid grid-cols-1 gap-3 mt-4">
-                        <label class="block">
-                            <span class="text-gray-700">Descrição</span>
-                            <textarea wire:model.debounce.defer="item.descricao" class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-caixaAzul text-sm" rows="2"></textarea>
-                            @error('item.descricao') <span class="text-red-500">{{ $message }}</span>@enderror
-                        </label>
-                    </div>
-                </div>
-                <div class="flex justify-between pt-2">
-                    <button wire:click.prevent="botaoCancelar" wire:loading.attr="disabled" class="border-solid border border-gray-400 text-sm font-sans bg-caixaCinza bg-opacity-90 text-gray-500 px-3 py-1 hover:bg-opacity-100 focus:outline-none min-w-[75px]" >Cancelar</button>
-                    <button wire:click.prevent="salvar" wire:loading.attr="disabled" class="border-solid border border-caixaLaranja text-sm font-sans bg-caixaLaranja bg-opacity-90 text-white px-3 py-1 hover:bg-opacity-100 focus:outline-none min-w-[75px]">Gravar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <livewire:administracao.checklist-itens.modal-checklist-livewire/>
 </div>
 @push('scripts')
     <script>
 
-        window.addEventListener('triggerMensagemSucesso', event => {
-            toastr.success(event.detail);
-        });
+    function abrirModalChecklist(id, subitem=false) {
+        Livewire.emit('abrirModalChecklist',id, subitem);
+    }
+
+    window.addEventListener('triggerChecklistItemGravadoSucesso', event => {
+        toastr.success(event.detail);
+        Livewire.emit('atualizarListaItens');
+    });
         
-        Livewire.on('triggerDelete', ([itemId, mensagem]) => {
-            
-            Swal.fire({
-                    title: 'Você tem certeza?',
-                    text: mensagem,
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Sim, tenho certeza!',
-                    cancelButtonText: 'Não'
-                }).then((result) => {
-                    if (result.value) {
-                        @this.call('delete',itemId)
-                    } else {
-                        console.log("Canceled");
-                    }
-                });
-        })
+    Livewire.on('triggerDelete', ([itemId, mensagem]) => {
+        
+        Swal.fire({
+                title: 'Você tem certeza?',
+                text: mensagem,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, tenho certeza!',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    @this.call('delete',itemId)
+                } else {
+                    console.log("Canceled");
+                }
+            });
+    })
         
     </script>
 @endpush

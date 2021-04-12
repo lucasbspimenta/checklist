@@ -49,7 +49,7 @@ class ModalLivewire extends Component
         $this->exibirModal = true;
         $this->agenda = Agenda::findOrNew($id);
         $this->agenda->inicio = $this->agenda->inicio ?? (Carbon::canBeCreatedFromFormat($inicio, 'Y-m-d') ? $inicio : null);
-        $this->agenda->final = $this->agenda->final ?? (Carbon::canBeCreatedFromFormat($final, 'Y-m-d', ) ? Carbon::createFromFormat('Y-m-d',$final)->subDay()->format('Y-m-d') : null);
+        $this->agenda->final = $this->agenda->final ?? (Carbon::canBeCreatedFromFormat($final, 'Y-m-d', ) ? $final : null);
     }
 
     public function botaoCancelar()
@@ -60,6 +60,7 @@ class ModalLivewire extends Component
 
     public function salvar()
     {
+        //dump($this->agenda);
         $this->validate();
         $this->agenda->save();
 

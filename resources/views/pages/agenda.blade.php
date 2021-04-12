@@ -17,7 +17,7 @@
             </h1>
         </div>
         <div class="flex items-center">
-            <button class="px-3 font-sans text-sm text-white border border-solid border-caixaLaranja bg-caixaLaranja bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" >
+            <button id="botao_adicionar_topo" onClick="abrirModalAgenda(false, false);" class="px-3 font-sans text-sm text-white border border-solid border-caixaLaranja bg-caixaLaranja bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" >
                 <i class="fas fa-plus md:mr-2"></i>
                 <div class="hidden md:inline-block">Adicionar</div>
             </button>
@@ -57,7 +57,7 @@
             select: aoSelecionarData,
             eventResize: alterarAgendamento,
             eventDrop: alterarAgendamento,
-            lazyFetching: false,
+            lazyFetching: true,
             editable:true,
             eventSources: [
                 @forelse ($lista_tipos_de_agendamento as $tipo)
@@ -103,20 +103,10 @@
         }
 
         calendar.render();
-
-        window.addEventListener('triggerAgendaGravadaSucesso', (event) => {
-            toastr.success('Agendamento em '+ event.detail +' gravado com sucesso!');
-            calendar.refetchEvents();
-        })
-
-        window.addEventListener('triggerAgendaExcluidaSucesso', (event) => {
-            toastr.success('Agendamento excluído com sucesso!');
-            calendar.refetchEvents()
-        })
     });
 
     function aoSelecionarData({startStr, endStr}) {
-        Livewire.emit('abrirModalAgenda',false, startStr, endStr);
+        abrirModalAgenda(startStr, endStr);
     }
 
     Livewire.on('triggerDeleteAgenda', (agendaId) => {
@@ -139,7 +129,20 @@
             });
     })
 
-    
+    function abrirModalAgenda(data_inicio, data_final) {
+        Livewire.emit('abrirModalAgenda',false, data_inicio, data_inicio);
+    }
+
+    window.addEventListener('triggerAgendaGravadaSucesso', (event) => {
+        toastr.success('Agendamento em '+ event.detail +' gravado com sucesso!');
+        console.log('Chamei o evento para atualizar a agenda', calendar.getEventSources());
+        calendar.refetchEvents();
+    })
+
+    window.addEventListener('triggerAgendaExcluidaSucesso', (event) => {
+        toastr.success('Agendamento excluído com sucesso!');
+        calendar.refetchEvents()
+    })
 
     </script>
 @endpush

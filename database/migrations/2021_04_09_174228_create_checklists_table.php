@@ -15,6 +15,12 @@ class CreateChecklistsTable extends Migration
     {
         Schema::create('checklists', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('agenda_id');
+            $table->foreign('agenda_id')->references('id')->on('agendas');
+
+            $table->boolean('concluido')->default(false);
+
             $table->timestamps();
         });
     }

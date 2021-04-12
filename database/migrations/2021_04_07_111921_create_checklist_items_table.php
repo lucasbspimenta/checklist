@@ -17,15 +17,15 @@ class CreateChecklistItemsTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('descricao')->nullable();
-            $table->boolean('situacao')->default(true);
+            $table->char('situacao',1)->default('A');
             $table->string('cor', 7)->nullable();
-
-            $table->unsignedBigInteger('checklist_items_id')->nullable();
-            $table->foreign('checklist_items_id')->references('id')->on('checklist_items');
+            $table->char('foto',1)->default('N');
+            $table->unsignedBigInteger('item_pai_id')->nullable();
+            $table->foreign('item_pai_id')->references('id')->on('checklist_items');
 
             $table->integer('ordem')->nullable();
 
-            $table->unique(['nome', 'checklist_items_id']);
+            $table->unique(['nome', 'item_pai_id']);
 
             $table->timestamps();
         });

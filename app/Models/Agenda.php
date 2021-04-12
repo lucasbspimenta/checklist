@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Agenda extends Model
 {
@@ -23,45 +24,22 @@ class Agenda extends Model
         return $this->belongsTo(Administracao\AgendamentoTipo::class, 'agendamento_tipos_id');
     }
 
-    /*
-    public function getInicioAttribute()
+    public function checklist()
     {
-        if (!$this->attributes['inicio']) {
-            return '';
-        }
-        $date = new Carbon($this->attributes['inicio']);
-
-        return $date->format('d/m/Y');
+        return $this->hasOne(Checklist::class)->withDefault();
     }
 
-    public function setInicioAttribute($value)
+    public function criarChecklist() 
     {
-        if ($value == '') {
-            $this->attributes['inicio'] = NULL;
-        } else {
-            $date = Carbon::createFromFormat('d/m/Y', $value);
-            $this->attributes['inicio'] = $date->format('Y-m-d');
-        }
-    }
+        DB::beginTransaction();
+        
+        $checklist = Checklist::create([
+            'agenda_id' => $this->id,
+            'concluido' => false
+        ]);
 
-    public function getFinalAttribute()
-    {
-        if (!$this->attributes['final']) {
-            return '';
-        }
-        $date = new Carbon($this->attributes['final']);
+        DB::commit();
 
-        return $date->format('d/m/Y');
+        $this->refresh();
     }
-
-    public function setFinalAttribute($value)
-    {
-        if ($value == '') {
-            $this->attributes['final'] = NULL;
-        } else {
-            $date = Carbon::createFromFormat('d/m/Y', $value);
-            $this->attributes['final'] = $date->format('Y-m-d');
-        }
-    }
-    */
 }
