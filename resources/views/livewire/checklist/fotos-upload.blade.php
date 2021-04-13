@@ -1,12 +1,12 @@
 <form wire:submit.prevent="save" enctype="multipart/form-data">
-    <div class="block w-20">
+    <div class="block w-20 mr-4">
         <div class="py-1 text-center text-gray-700 border-t-4" style="border-color: {{ $resposta->item->cor ?? $resposta->item->itempai->cor }}">
             <p id="caption" class="text-sm">{{ $resposta->item->nome }}</p>
         </div>
 
         @if($resposta->foto)
             <a class="image-popup-link" href="{{ Storage::disk('public')->exists($resposta->foto) ? Storage::disk('public')->url($resposta->foto) : asset('images/image_placeholder.jpg') }}">
-                <img alt="{{ $resposta->item->nome ?? '' }}" class="w-full" src="{{ Storage::disk('public')->exists($resposta->foto) ? Storage::disk('public')->url($resposta->foto) : asset('images/image_placeholder.jpg') }}" />
+                <img alt="{{ $resposta->item->nome ?? '' }}" class="w-20 h-14" src="{{ Storage::disk('public')->exists($resposta->foto) ? Storage::disk('public')->url($resposta->foto) : asset('images/image_placeholder.jpg') }}" />
             </a>
             <div class="text-sm text-center">
                 <button 
@@ -17,7 +17,7 @@
             </div>
         @else
             <label for="fileUpload_{{ $resposta->id }}" class="cursor-pointer">
-                <img alt="{{ $resposta->item->nome ?? '' }}" class="w-20 max-h-14" src="{{ Storage::disk('public')->exists($resposta->foto) ? Storage::disk('public')->url($resposta->foto) : asset('images/image_placeholder.jpg') }}" />
+                <img alt="{{ $resposta->item->nome ?? '' }}" class="w-20 h-14" src="{{ Storage::disk('public')->exists($resposta->foto) ? Storage::disk('public')->url($resposta->foto) : asset('images/image_placeholder.jpg') }}" />
                 <div class="text-sm text-center">
                     <label for="fileUpload_{{ $resposta->id }}" class="inline-flex items-center w-full h-full px-1 py-1 text-xs text-white cursor-pointer bg-caixaLaranja">
                         <i class="fas fa-upload md:mr-2"></i>

@@ -1,2 +1,34 @@
 [06-Apr-2021 12:18:28 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\livewire\livewire\src\LivewireManager.php on line 66
 [12-Apr-2021 19:16:52 America/Sao_Paulo] PHP Fatal error:  Trait 'App\Http\Livewire\Checklist\WithFileUploads' not found in C:\inetpub\wwwroot\app\Http\Livewire\Checklist\FotosUpload.php on line 9
+[13-Apr-2021 15:57:43 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08S01]: [Microsoft][ODBC Driver 17 for SQL Server]Communication link failure in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php:338
+Stack trace:
+#0 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(338): PDO->prepare('select top 1 * ...')
+#1 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(671): Illuminate\Database\Connection->Illuminate\Database\{closure}('select top 1 * ...', Array)
+#2 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(752): Illuminate\Database\Connection->runQueryCallback('select top 1 * ...', Array, Object(Closure))
+#3 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(732): Illuminate\Database\Connection->tryAgainIfCausedByLostConnection(Object(Illuminate\Database\QueryException), 'select top 1 * ...', Array, Object(Closure))
+#4 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Databa in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 338
+[13-Apr-2021 15:57:43 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 671
+[13-Apr-2021 15:58:14 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08S01]: [Microsoft][ODBC Driver 17 for SQL Server]Communication link failure in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php:338
+Stack trace:
+#0 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(338): PDO->prepare('select * from [...')
+#1 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(671): Illuminate\Database\Connection->Illuminate\Database\{closure}('select * from [...', Array)
+#2 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(752): Illuminate\Database\Connection->runQueryCallback('select * from [...', Array, Object(Closure))
+#3 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(732): Illuminate\Database\Connection->tryAgainIfCausedByLostConnection(Object(Illuminate\Database\QueryException), 'select * from [...', Array, Object(Closure))
+#4 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Databa in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 338
+[13-Apr-2021 15:58:14 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 671
+[13-Apr-2021 15:59:21 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08S01]: [Microsoft][ODBC Driver 17 for SQL Server]Communication link failure in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php:338
+Stack trace:
+#0 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(338): PDO->prepare('select * from [...')
+#1 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(671): Illuminate\Database\Connection->Illuminate\Database\{closure}('select * from [...', Array)
+#2 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(752): Illuminate\Database\Connection->runQueryCallback('select * from [...', Array, Object(Closure))
+#3 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(732): Illuminate\Database\Connection->tryAgainIfCausedByLostConnection(Object(Illuminate\Database\QueryException), 'select * from [...', Array, Object(Closure))
+#4 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Databa in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 338
+[13-Apr-2021 15:59:21 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 671
+[13-Apr-2021 16:00:36 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08S01]: [Microsoft][ODBC Driver 17 for SQL Server]Communication link failure in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php:338
+Stack trace:
+#0 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(338): PDO->prepare('select * from [...')
+#1 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(671): Illuminate\Database\Connection->Illuminate\Database\{closure}('select * from [...', Array)
+#2 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(752): Illuminate\Database\Connection->runQueryCallback('select * from [...', Array, Object(Closure))
+#3 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(732): Illuminate\Database\Connection->tryAgainIfCausedByLostConnection(Object(Illuminate\Database\QueryException), 'select * from [...', Array, Object(Closure))
+#4 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Databa in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 338
+[13-Apr-2021 16:00:36 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 671

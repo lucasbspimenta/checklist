@@ -29,6 +29,16 @@ class Agenda extends Model
         return $this->hasOne(Checklist::class)->withDefault();
     }
 
+    public function getInicioFormatadoAttribute() 
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->inicio)->format('d/m/Y');
+    }
+
+    public function getFinalFormatadoAttribute() 
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->final)->format('d/m/Y');
+    }
+
     public function criarChecklist() 
     {
         DB::beginTransaction();

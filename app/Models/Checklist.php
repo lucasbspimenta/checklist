@@ -21,7 +21,22 @@ class Checklist extends Model
 
     public function agendamento()
     {
-        return $this->belongsTo(Agenda::class)->withDefault();
+        return $this->belongsTo(Agenda::class, 'agenda_id')->withDefault();
+    }
+
+    public function getPercentualPreenchimentoAttribute() 
+    {
+        $total_itens = $this->respostas->count();
+        $concluidos  = $this->respostas->where('concluido', 1)->count();
+
+        $percentual = ($total_itens > 0) ? ($concluidos * 100) / $total_itens : 0;
+
+        return round($percentual,2,PHP_ROUND_HALF_ODD);
+    }
+
+    public function getpercentualDemandasAttribute() 
+    {
+        return 0.00;
     }
 
     public function getMacroitensAttribute()
@@ -73,7 +88,7 @@ class Checklist extends Model
             DB::raw($checklist->id . ' as checklist_id'),
             DB::raw('NULL as resposta'))
             ->where('situacao', 'A')
-            ->orWhere(function($query) {
+            ->Where(function($query) {
                 $query->whereNotNull('item_pai_id')
                       ->orWhere('foto', 'S');
             })

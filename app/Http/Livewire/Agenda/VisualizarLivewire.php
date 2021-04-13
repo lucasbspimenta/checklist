@@ -4,11 +4,13 @@ namespace App\Http\Livewire\Agenda;
 
 use Livewire\Component;
 use App\Models\Agenda;
+use App\Models\Administracao\ChecklistItem;
 
 class VisualizarLivewire extends Component
 {
     public $agenda;
     public $exibirModal = false;
+    public $conta_itens_ativos = 0;
 
     protected $listeners = ['abrirModalVerAgenda' => 'abrirModal', 'triggerDeleteAgenda' => 'excluir'];
 
@@ -20,6 +22,7 @@ class VisualizarLivewire extends Component
     public function mount() 
     {
         $this->agenda = new Agenda();
+        $this->conta_itens_ativos = ChecklistItem::where('situacao','A')->count();
     }
 
     public function abrirModal($id=null) 

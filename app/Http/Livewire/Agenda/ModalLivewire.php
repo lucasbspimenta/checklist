@@ -11,6 +11,7 @@ class ModalLivewire extends Component
     public $agenda;
     public $tiposagendamentos = [];
     public $exibirModal = false;
+    
 
     protected $listeners = ['abrirModalAgenda' => 'abrirModal'];
 

@@ -23,6 +23,7 @@ Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda']
 
 Route::get('/checklist',                                [ChecklistController::class, 'index'])->name('checklist.index');
 Route::match(['get', 'post'],'/checklist/{agenda_id}',  [ChecklistController::class, 'show'])->name('checklist.edit');
+Route::delete('/checklist',                             [ChecklistController::class, 'delete'])->name('checklist.delete');
 
 Route::prefix('administracao')->name('adm.')->group(function () {
 

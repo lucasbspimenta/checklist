@@ -18,5 +18,5 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.copyDirectory('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
 
-mix.browserSync('localhost:8000');
+//mix.browserSync('localhost:8000');
 

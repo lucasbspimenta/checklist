@@ -26,12 +26,13 @@
 </nav>
 <div class="container px-2 py-3 mx-auto h-4/5">
     <div class="flex flex-wrap h-full -mx-1">
-
+        <!--
         <div class="w-1/4 px-1 my-1 overflow-hidden">
-        <!-- Column Content -->
+         Column Content 
         </div>
+        -->
 
-        <div class="w-3/4 h-full px-1 my-1 overflow-hidden border">
+        <div class="w-full h-full px-1 my-1 overflow-hidden border">
             <div id="calendar"></div>
         </div>
 
@@ -136,7 +137,10 @@
     window.addEventListener('triggerAgendaGravadaSucesso', (event) => {
         toastr.success('Agendamento em '+ event.detail +' gravado com sucesso!');
         console.log('Chamei o evento para atualizar a agenda', calendar.getEventSources());
-        calendar.refetchEvents();
+        console.log(calendar.refetchEvents());
+
+        if(calendar.getEventSources().length <= 0)
+            document.location.reload(true);
     })
 
     window.addEventListener('triggerAgendaExcluidaSucesso', (event) => {

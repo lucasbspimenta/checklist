@@ -14,15 +14,20 @@ class CreateChecklistItemDemandasTable extends Migration
     public function up()
     {
         Schema::create('checklist_item_demandas', function (Blueprint $table) {
+
             $table->id();
 
-            $table->integer('id_externo');
+            $table->unsignedBigInteger('sistema_id');
+            $table->foreign('sistema_id')->references('id')->on('demanda_sistemas');
+
+            $table->integer('demanda_id')->nullable();
+            $table->string('demanda_url')->nullable();
+            $table->string('demanda_situacao')->nullable();
+
+            $table->longText('descricao')->nullable();
 
             $table->unsignedBigInteger('checklist_item_resposta_id');
             $table->foreign('checklist_item_resposta_id')->references('id')->on('checklist_item_respostas');
-
-            $table->unsignedBigInteger('demanda_sistema_id');
-            $table->foreign('demanda_sistema_id')->references('id')->on('demanda_sistemas');
 
             $table->timestamps();
         });
