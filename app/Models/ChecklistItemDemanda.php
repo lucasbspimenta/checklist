@@ -14,4 +14,18 @@ class ChecklistItemDemanda extends Model
         ,   'checklist_item_resposta_id'
         ,   'descricao'
 	];
+
+    public static function boot() {
+        parent::boot();
+
+        /*
+        static::creating(function ($model) {
+            $model->created_by = Auth::id();
+            $model->updated_by = Auth::id();
+        });
+        static::updating(function ($model) {
+            $model->updated_by = Auth::id();
+        });
+        */
+    }
 }

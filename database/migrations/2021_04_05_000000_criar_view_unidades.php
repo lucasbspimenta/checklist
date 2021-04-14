@@ -13,30 +13,33 @@ class CriarViewUnidades extends Migration
      */
     public function up()
     {
+        DB::unprepared('DROP VIEW IF EXISTS [dbo].[unidades]'); 
         DB::unprepared('
+        CREATE VIEW [dbo].[unidades]
+        as
         SELECT        
-            id_unidade as id,
-            cUnidade as codigo,
-            cdv as codigoDv,
-            cTipo as tipo,
-            cTipo_PV as tipoPv,
-            cNome as nome,
-            cEndereco_Cidade as municipio,
-            cEndereco_UF as uf,
-            cBairro as bairro,
-            cEndereco as endereco,
-            cSituacao as situacao,
-            cEmail as email,
-            cCEP as cep,
-            cSubordinacao as codigoSubordinacao,
-            cSubordinacao_dv as codigoDvSubordinacao,
-            cSubordinacao_Tipo as tipoSubordinacao,
-            cSubordinacao_Nome as nomeSubordinacao,
-            csev_codigo_especifico as codigoSev,
-            csev_dv as codigoDvSev,
-            csev_tipo as tipoSev,
-            csev_nome as nomeSev,
-            csev_nome_completo as nomeCompletoSev
+            RTRIM(id_unidade) as id,
+            RTRIM(cUnidade) as codigo,
+            RTRIM(cdv) as codigoDv,
+            RTRIM(cTipo) as tipo,
+            RTRIM(cTipo_PV) as tipoPv,
+            RTRIM(cNome) as nome,
+            RTRIM(cEndereco_Cidade) as municipio,
+            RTRIM(cEndereco_UF) as uf,
+            RTRIM(cBairro) as bairro,
+            RTRIM(cEndereco) as endereco,
+            RTRIM(cSituacao) as situacao,
+            RTRIM(cEmail) as email,
+            RTRIM(cCEP) as cep,
+            RTRIM(cSubordinacao) as codigoSubordinacao,
+            RTRIM(cSubordinacao_dv) as codigoDvSubordinacao,
+            RTRIM(cSubordinacao_Tipo) as tipoSubordinacao,
+            RTRIM(cSubordinacao_Nome) as nomeSubordinacao,
+            RTRIM(csev_codigo_especifico) as codigoSev,
+            RTRIM(csev_dv) as codigoDvSev,
+            RTRIM(csev_tipo) as tipoSev,
+            RTRIM(csev_nome) as nomeSev,
+            RTRIM(csev_nome_completo) as nomeCompletoSev
         FROM            
             ATENDIMENTO.dbo.UNIDADES_BUSCA
         ');

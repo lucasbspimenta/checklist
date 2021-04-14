@@ -20,13 +20,16 @@
                 </div>
                 <div class="grid grid-cols-1 gap-3 mt-4">
                     <label class="block">
-                        <span class="text-gray-700">Imóvel</span>
-                        <select class="w-full" wire:model.debounce.defer="agenda.imovel_id">
-                            <option value="" >Selecione o imóvel</option>
-                            <option value="1">Ag. Divinópolis</option>
-                            <option value="2">Ag. Lucas do Divinópolis</option>
+                        <span class="text-gray-700">Unidade</span>
+                        <select class="w-full" wire:model.debounce.defer="agenda.unidade_id">
+                            <option value="" >Selecione a unidade</option>
+                            @forelse($unidades as $unidade)
+                                <option value="{{ $unidade->id }}">{{ $unidade->tipoPv ?? '' }}&nbsp;{{ $unidade->nome }}</option>
+                            @empty
+                                <option value="" disabled>Nenhuma unidade encontrada.</option>
+                            @endforelse
                         </select>
-                        @error('agenda.imovel_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                        @error('agenda.unidade_id') <span class="text-red-500">{{ $message }}</span>@enderror
                     </label>
                     <label class="block">
                         <span class="text-gray-700">Tipo de Agendamento</span>

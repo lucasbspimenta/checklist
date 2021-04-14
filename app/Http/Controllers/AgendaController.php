@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Unidade;
 use App\Models\Agenda;
 use App\Models\Administracao\AgendamentoTipo;
-use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
@@ -14,13 +17,13 @@ class AgendaController extends Controller
 		//dd($request->ajax());
     	if($request->dataType == 'json')
     	{
-    		$data = Agenda::where('agendamento_tipos_id', $request->tipo_id)
-							->get(['id', 'descricao', 'inicio as start', 'final as end','imovel_id as title']);
+    		$data = Agenda::join('unidades', 'agendas.unidade_id', '=', 'unidades.id')->where('agendamento_tipos_id', $request->tipo_id)
+							->get(['agendas.id', 'descricao', 'inicio as start', 'final as end',DB::raw("unidades.tipoPv + ' ' + unidades.nome as title")]);
 
             return response()->json($data);
     	}
 
-		$lista_tipos_de_agendamento = AgendamentoTipo::where('situacao',1)->has('agendamentos')->get();
+		$lista_tipos_de_agendamento = AgendamentoTipo::where('situacao',1)->get();
 
     	return view('pages.agenda', compact('lista_tipos_de_agendamento'));
     }

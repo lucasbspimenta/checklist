@@ -7,7 +7,7 @@
                 <li class="flex items-center">
                     <a href="{{ route('checklist.index') }}">Checklist</a>
                 </li>
-                <li>@if($agenda){{ $agenda->imovel_id }} - {{ $agenda->inicio }} @endif</li>
+                <li>@if($agenda){{ $agenda->unidade_id }} - {{ $agenda->inicio }} @endif</li>
             </ol>
         </nav>
         <div class="flex flex-row justify-between h-8 my-2">
@@ -39,7 +39,7 @@
                     <div class="hidden w-full grid-flow-col gap-8 auto-cols-max">
                         <label class="block">
                             <span class="text-gray-400">Imóvel</span>
-                            <div class="table-cell text-base leading-6 text-center text-gray-700">{{ $agenda->imovel_id ?? '' }}</div>
+                            <div class="table-cell text-base leading-6 text-center text-gray-700">{{ $agenda->unidade_id ?? '' }}</div>
                         </label>
                         <label class="block">
                             <span class="text-gray-400">Tipo</span>
@@ -102,8 +102,13 @@
                         <div class="w-full border-b rounded-t cursor-pointer border-gray-50 hover:bg-gray-200">
                             <div class="relative flex items-center w-full p-2 pl-2 border-l-4 border-transparent hover:border-caixaLaranja">
                                 <div class="flex items-center w-full">
-                                    <div class="mx-2 -mt-1 ">{{ $agendamento->imovel_id }} - {{ $agendamento->inicio }}
-                                        <div class="w-full -mt-1 text-xs font-normal text-gray-500 normal-case truncate">{{ $agendamento->tipo->id }}</div>
+                                    <div class="mx-2 -mt-1 ">{{ $agendamento->unidade->nomeCompleto }} - {{ $agendamento->dataFormatada }}
+                                        <div class="w-full -mt-1 text-xs font-normal text-gray-500 normal-case truncate">
+                                            <div class="flex items-center text-base leading-6 text-center text-gray-700">
+                                                <div class="table-cell w-4 h-4 mr-2 border" style="background-color: {{ $agendamento->tipo->cor }}"></div>
+                                                {{ $agendamento->tipo->nome ?? '' }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

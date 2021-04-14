@@ -17,21 +17,23 @@
                     </label>
                     <label class="block">
                         <span class="text-gray-700">Início</span>
-                        <p>{{ $agenda->inicio ?? '' }}</p>
+                        <p>{{ $agenda->inicioFormatado ?? '' }}</p>
                     </label>
+                    @if($agenda->inicio && $agenda->final && $agenda->inicio != $agenda->final)
                     <label class="block">
                         <span class="text-gray-700">Final</span>
-                        <p>{{ $agenda->final ?? '' }}</p>
+                        <p>{{ $agenda->finalFormatado ?? '' }}</p>
                     </label>
+                    @endif
                 </div>
                 <div class="grid grid-cols-1 gap-3 mt-4">
                     <label class="block">
-                        <span class="text-gray-700">Imóvel</span>
-                        <p>{{ $agenda->imovel_id  ?? '' }}</p>
+                        <span class="text-gray-700">Unidade</span>
+                        <p>{{ $agenda->unidade->tipoPv  ?? '' }}&nbsp;{{ $agenda->unidade->nome  ?? '' }}</p>
                     </label>
                     <label class="block">
                         <span class="text-gray-700">Tipo</span>
-                        <p><div style="height: 20px; ">{{ $agenda->tipo->cor ?? '' }}</div>{{ $agenda->tipo->nome ?? '' }}</p>
+                        <div class="block"><div class="inline-block mr-2" style="height: 20px; width: 20px; background-color: {{ $agenda->tipo->cor ?? '#F5F5F5' }}">&nbsp;</div>{{ $agenda->tipo->nome ?? '' }}</div>
                     </label>
                     <label class="block">
                         <span class="text-gray-700">Descrição</span>

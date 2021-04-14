@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Scopes\UnidadeScope;
 
 class Agenda extends Model
 {
@@ -15,9 +16,14 @@ class Agenda extends Model
 		'descricao'
         , 'inicio'
         , 'final'
-        , 'imovel_id'
+        , 'unidade_id'
         , 'agendamento_tipos_id'
 	];
+
+    public function unidade()
+    {
+        return $this->belongsTo(Unidade::class)->withDefault();
+    }
 
     public function tipo()
     {
@@ -31,12 +37,27 @@ class Agenda extends Model
 
     public function getInicioFormatadoAttribute() 
     {
-        return Carbon::createFromFormat('Y-m-d', $this->inicio)->format('d/m/Y');
+        return ($this->inicio) ? Carbon::createFromFormat('Y-m-d', $this->inicio)->format('d/m/Y') : $this->inicio;
     }
 
     public function getFinalFormatadoAttribute() 
     {
-        return Carbon::createFromFormat('Y-m-d', $this->final)->format('d/m/Y');
+        return ($this->final) ? Carbon::createFromFormat('Y-m-d', $this->final)->format('d/m/Y') : $this->final;
+    }
+
+    public function getDataFormatadaAttribute()
+    {
+        if($this->inicio && $this->final)
+        {
+            if($this->inicio == $this->final)
+                return $this->inicioFormatado;
+            else
+                return $this->inicioFormatado . ' a ' .$this->finalFormatado;
+        }
+        else
+        {
+            return '';
+        }
     }
 
     public function criarChecklist() 
@@ -51,5 +72,22 @@ class Agenda extends Model
         DB::commit();
 
         $this->refresh();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+ 
+        static::addGlobalScope(new UnidadeScope);
+
+        /*
+        static::creating(function ($model) {
+            $model->created_by = Auth::id();
+            $model->updated_by = Auth::id();
+        });
+        static::updating(function ($model) {
+            $model->updated_by = Auth::id();
+        });
+        */
     }
 }

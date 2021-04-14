@@ -114,4 +114,18 @@ class DemandaSistema extends Model
 
         return null;
     }
+
+    public static function boot() {
+        parent::boot();
+
+        /*
+        static::creating(function ($model) {
+            $model->created_by = Auth::id();
+            $model->updated_by = Auth::id();
+        });
+        static::updating(function ($model) {
+            $model->updated_by = Auth::id();
+        });
+        */
+    }
 }

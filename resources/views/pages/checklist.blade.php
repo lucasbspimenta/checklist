@@ -69,7 +69,7 @@
                                     até {{ ($checklist->agendamento->finalFormatado) }}
                                 @endif
                             </td>
-                            <td class="px-2 py-2">{{ $checklist->agendamento->imovel_id }}</td>
+                            <td class="px-2 py-2">{{ $checklist->agendamento->unidade_id }}</td>
                             <td class="px-2 py-2">{{ $checklist->agendamento->descricao }}</td>
                             <td class="px-2 py-2">{{ $checklist->percentualPreenchimento }}</td>
                             <td class="px-2 py-2">{{ $checklist->percentualDemandas }}</td>

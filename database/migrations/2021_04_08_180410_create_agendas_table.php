@@ -19,10 +19,10 @@ class CreateAgendasTable extends Migration
             $table->date('inicio');
             $table->date('final');
 
-            $table->unsignedBigInteger('imovel_id')->nullable();
-            //$table->foreign('agendamento_tipos_id')->references('id')->on('agendamento_tipos');
+            $table->unsignedBigInteger('unidade_id');
+            //$table->foreign('unidade_id')->references('id')->on('unidades'); Por ser VIEW não pode ter CONSTRAINS
 
-            $table->unsignedBigInteger('agendamento_tipos_id')->nullable();
+            $table->unsignedBigInteger('agendamento_tipos_id');
             $table->foreign('agendamento_tipos_id')->references('id')->on('agendamento_tipos');
 
             $table->bigInteger('created_by')->nullable()->unsigned();

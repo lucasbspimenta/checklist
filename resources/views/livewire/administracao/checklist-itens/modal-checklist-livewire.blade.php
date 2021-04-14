@@ -42,7 +42,7 @@
                             <label for="radio-a">Desativado</label>
                             <input id="radio-b" type="radio" name="radio-situacao" value="A" wire:model.debounce.defer="checklistitem.situacao"/>
                             <label for="radio-b">Ativado</label>
-                            <input id="radio-default" type="radio" name="radio-foto" value="" wire:model.debounce.defer="checklistitem.situacao"/>
+                            <input class="hidden" id="radio-default" type="radio" name="radio-foto" value="" wire:model.debounce.defer="checklistitem.situacao"/>
                         </div>
                         @error('checklistitem.situacao') <span class="flex items-center mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">{{ $message }}</span>@enderror
                     </label>
@@ -65,7 +65,7 @@
                             <label for="radio-foto-nao">Não</label>
                             <input id="radio-foto-sim" type="radio" name="radio-foto" value="S" wire:model.debounce.defer="checklistitem.foto"/>
                             <label for="radio-foto-sim">Sim</label>
-                            <input id="radio-default" type="radio" name="radio-foto" value="" wire:model.debounce.defer="checklistitem.foto"/>
+                            <input class="hidden" id="radio-default" type="radio" name="radio-foto" value="" wire:model.debounce.defer="checklistitem.foto"/>
                         </div>
                         @error('checklistitem.foto') <span class="flex items-center mt-1 ml-1 text-xs font-medium tracking-wide text-red-500">{{ $message }}</span>@enderror
                     </label>

@@ -5,11 +5,13 @@ use Illuminate\Support\Carbon;
 use Livewire\Component;
 use App\Models\Agenda;
 use App\Models\Administracao\AgendamentoTipo;
+use App\Models\Unidade;
 
 class ModalLivewire extends Component
 {
     public $agenda;
     public $tiposagendamentos = [];
+    public $unidades = [];
     public $exibirModal = false;
     
 
@@ -17,7 +19,7 @@ class ModalLivewire extends Component
 
     public function rules() {
         return [
-            'agenda.imovel_id' => 'required|integer',
+            'agenda.unidade_id' => 'required|integer',
             'agenda.inicio' => 'required|date',
             'agenda.final' => 'date',
             'agenda.agendamento_tipos_id' => 'required|integer',
@@ -27,7 +29,7 @@ class ModalLivewire extends Component
 
     public function messages() {
         return [
-            'agenda.imovel_id.required' => 'Imóvel é obrigatório',
+            'agenda.unidade_id.required' => 'Unidade é obrigatória',
             'agenda.agendamento_tipos_id.required' => 'Tipo de agendamento é obrigatório',
             'agenda.inicio.required' => 'Início é obrigatório',
             'agenda.ordem.integer' => 'Deve um número inteiro'
@@ -43,6 +45,7 @@ class ModalLivewire extends Component
     {
         $this->agenda = $agenda ?? new Agenda();
         $this->tiposagendamentos = AgendamentoTipo::where('situacao','=',1)->get();
+        $this->unidades = Unidade::all();
     }
 
     public function abrirModal($id=null, $inicio=null, $final=null) 
@@ -69,4 +72,5 @@ class ModalLivewire extends Component
         $this->botaoCancelar();
     }
 }
+
 
