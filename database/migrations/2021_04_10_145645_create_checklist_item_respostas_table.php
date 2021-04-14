@@ -24,7 +24,12 @@ class CreateChecklistItemRespostasTable extends Migration
             $table->unsignedBigInteger('checklist_item_id');
             $table->foreign('checklist_item_id')->references('id')->on('checklist_items');
 
-            $table->longText('foto')->nullable();
+            $table->binary('foto')->nullable();
+
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->bigInteger('updated_by')->nullable()->unsigned();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
 
             $table->timestamps();
         });

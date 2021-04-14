@@ -27,6 +27,11 @@ class CreateChecklistItemsTable extends Migration
 
             $table->unique(['nome', 'item_pai_id']);
 
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->bigInteger('updated_by')->nullable()->unsigned();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
+
             $table->timestamps();
         });
     }

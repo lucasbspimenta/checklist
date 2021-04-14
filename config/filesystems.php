@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\TemporaryDirectory\TemporaryDirectory;
+
 return [
 
     /*
@@ -34,14 +36,12 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-        /*
-        'public' => [
+        
+        'temp' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
+            'root' => is_dir(sys_get_temp_dir() . DIRECTORY_SEPARATOR. 'tmp_checklist_laravel') ? sys_get_temp_dir() . DIRECTORY_SEPARATOR. 'tmp_checklist_laravel' : mkdir( sys_get_temp_dir() . DIRECTORY_SEPARATOR. 'tmp_checklist_laravel' ),
         ],
-        */
+        
 
         'public' => [
             'driver' => 'local',

@@ -25,6 +25,11 @@ class CreateAgendasTable extends Migration
             $table->unsignedBigInteger('agendamento_tipos_id')->nullable();
             $table->foreign('agendamento_tipos_id')->references('id')->on('agendamento_tipos');
 
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->bigInteger('updated_by')->nullable()->unsigned();
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
+
             $table->timestamps();
         });
     }
