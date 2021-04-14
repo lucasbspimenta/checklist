@@ -30,9 +30,9 @@ class CreateChecklistItemDemandasTable extends Migration
             $table->foreign('checklist_item_resposta_id')->references('id')->on('checklist_item_respostas');
 
             $table->bigInteger('created_by')->nullable()->unsigned();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('users');
             $table->bigInteger('updated_by')->nullable()->unsigned();
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('updated_by')->references('id')->on('users');
 
             $table->timestamps();
         });
