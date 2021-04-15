@@ -6,6 +6,8 @@ use Livewire\Component;
 
 class DemandasVinculadas extends Component
 {
+    public $checklist;
+    
     public function render()
     {
         return view('livewire.checklist.demandas-vinculadas');

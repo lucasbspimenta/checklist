@@ -6,15 +6,16 @@
             <ol class="inline-flex p-0 list-none">
                 <li class="flex items-center">
                     <a href="{{ route('checklist.index') }}">Checklist</a>
+                    <svg class="w-2 h-2 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
                 </li>
-                <li>@if($agenda){{ $agenda->unidade_id }} - {{ $agenda->inicio }} @endif</li>
+                <li>@if($agenda){{ Str::title($agenda->unidade->nomeCompleto) }} - {{ $agenda->dataFormatada }} @endif</li>
             </ol>
         </nav>
         <div class="flex flex-row justify-between h-8 my-2">
             <div class="flex flex-shrink-0 mr-10">
                 <h1 class="h-full text-lg text-caixaAzul font-futurabold">
                     <span class="inline-block w-3 h-3 mr-2 bg-caixaLaranja" style="clip-path: polygon(100% 0, 0 100%, 100% 100%);"></span>
-                    Checklist
+                    Checklist @if($agenda) - {{ Str::title($agenda->unidade->nomeCompleto) }} - {{ $agenda->dataFormatada }} @endif
                 </h1>
             </div>
             <div class="flex items-center">
@@ -76,10 +77,11 @@
                     <x-checklist.lista-itens-vinculados :checklist="$agenda->checklist"/>
                 </form>
             </div>
-            <div class="w-1/4 px-1">
-                <h2 class="h-full text-base text-caixaAzul font-futurabold">
-                    Demandas
+            <div class="w-1/4 p-4 bg-white border shadow-sm">
+                <h2 class="mb-3 text-sm text-caixaAzul font-futurabold">
+                    Demandas vinculadas
                 </h2>
+                <livewire:checklist.demandas-vinculadas :checklist="$agenda->checklist"/>
             </div>
         </div>
     </div>

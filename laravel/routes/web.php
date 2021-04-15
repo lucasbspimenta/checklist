@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ChecklistController;
 
@@ -37,3 +38,11 @@ Route::prefix('administracao')->name('adm.')->group(function () {
 
 });
 
+Route::get('/artisan', function () {
+    $exitCode = Artisan::call('key:generate');
+    //ddd($exitCode);
+    //$exitCode = Artisan::call('key:generate');
+    //ddd($exitCode);
+    //$exitCode = Artisan::call('migrate:fresh --seed');
+    //ddd($exitCode);
+})->name('artisan');
