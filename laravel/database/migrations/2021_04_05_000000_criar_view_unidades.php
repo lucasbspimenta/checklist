@@ -13,13 +13,13 @@ class CriarViewUnidades extends Migration
      */
     public function up()
     {
-        DB::unprepared('DROP VIEW IF EXISTS [dbo].[unidades]'); 
+        DB::unprepared('DROP VIEW IF EXISTS [dbo].[unidades]');
         DB::unprepared('
         CREATE VIEW [dbo].[unidades]
         as
-        SELECT        
+        SELECT
             RTRIM(id_unidade) as id,
-            RTRIM(cUnidade) as codigo,
+            COALESCE(TRY_CAST(RTRIM(cUnidade) as integer), cUnidade) as codigo,
             RTRIM(cdv) as codigoDv,
             RTRIM(cTipo) as tipo,
             RTRIM(cTipo_PV) as tipoPv,
@@ -40,7 +40,7 @@ class CriarViewUnidades extends Migration
             RTRIM(csev_tipo) as tipoSev,
             RTRIM(csev_nome) as nomeSev,
             RTRIM(csev_nome_completo) as nomeCompletoSev
-        FROM            
+        FROM
             ATENDIMENTO.dbo.UNIDADES_BUSCA
         ');
     }

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -19,14 +20,20 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'matricula',
+        'fisica',
+        'unidade',
+        'funcao',
+        'cargo'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'remember_token',
-    ];
+    public function unidadeAdministrativa()
+    {
+        return $this->hasOne(Unidade::class,'codigo','unidade')->withDefault();
+    }
+
+    public function unidadeFisica()
+    {
+        return $this->hasOne(Unidade::class,'codigo','fisica')->withDefault();
+    }
 }
