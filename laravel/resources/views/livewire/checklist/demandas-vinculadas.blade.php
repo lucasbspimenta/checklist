@@ -6,7 +6,7 @@
                     <div class="w-auto mx-2 -mt-1 text-sm text-gray-700 ">
                         <div class="flex items-center justify-between w-full">
                             {{ $demanda->resposta->item->itemPai->nome  }}&nbsp;&#10148;&nbsp;{{ $demanda->resposta->item->nome  }}
-                            @if(trim($demanda->migracao) == 'P')
+                            @if(trim($demanda->migracao) == 'P' && $checklist->concluido != 1)
                             <div class="flex-initial max-w-full text-xs font-normal leading-none text-red-600 cursor-pointer whitespace-nowrap" alt="Excluir demanda">
                                 <button class="outline-none focus:outline-none" onClick="ConfirmaExclusaoDemanda({{ $demanda->id }})"><i class="mx-2 font-bold text-red-600 fas fa-trash"></i></button>
                             </div>

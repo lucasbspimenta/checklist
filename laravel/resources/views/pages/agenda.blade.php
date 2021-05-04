@@ -85,10 +85,12 @@
             },
             eventDidMount: function(info) {
 
-                var tooltip = tippy(info.el, {
-                    content: '<ul><li>'+ info.event.extendedProps.descricao +'</li></ul>',
-                    allowHTML: true,
-                });
+                if(info.event.extendedProps.descricao) {
+                    var tooltip = tippy(info.el, {
+                        content: '<ul><li>'+ info.event.extendedProps.descricao +'</li></ul>',
+                        allowHTML: true,
+                    });
+                }
             },
         });
 

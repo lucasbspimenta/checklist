@@ -77,13 +77,19 @@
                                 <div class="flex flex-nowrap">
                                     <a href="{{ route('checklist.edit', $checklist->agendamento->id) }}"
                                         class="px-3 font-sans text-sm bg-white border border-white border-solid text-caixaAzul hover:border-gray focus:outline-none" >
-                                        <i class="fas fa-edit"></i>
+                                        @if ($checklist->concluido != 1)
+                                            <i class="fas fa-edit"></i>
+                                        @else
+                                            <i class="fas fa-eye"></i>
+                                        @endif
                                     </a>
-                                    <button 
-                                        onClick="excluirChecklist({{ $checklist->id }})" 
-                                        class="px-3 font-sans text-sm bg-white border border-white border-solid text-red hover:border-gray focus:outline-none" >
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    @if ($checklist->concluido != 1)
+                                        <button 
+                                            onClick="excluirChecklist({{ $checklist->id }})" 
+                                            class="px-3 font-sans text-sm bg-white border border-white border-solid text-red hover:border-gray focus:outline-none" >
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

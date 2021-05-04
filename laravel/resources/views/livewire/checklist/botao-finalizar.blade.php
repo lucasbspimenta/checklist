@@ -1,6 +1,6 @@
 <form class="flex h-full ml-2" 
     method="POST"
-    action="{{ route('checklist.edit', $agenda->id) }}"
+    action="{{ route('checklist.edit', $checklist->agendamento->id) }}"
 >
     @csrf
     <input type="hidden" name="redirect_to" value="{{ session('redirect_to') ?? url()->previous() }}" />

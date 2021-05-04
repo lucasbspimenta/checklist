@@ -5,6 +5,8 @@ namespace App\Models\Administracao;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\ChecklistItemResposta;
+
 use Auth;
 
 class ChecklistItem extends Model
@@ -21,6 +23,11 @@ class ChecklistItem extends Model
     public function itempai()
     {
         return $this->belongsTo(ChecklistItem::class, 'item_pai_id');
+    }
+
+    public function concluidoNoChecklist($checklist_id) {
+        $resposta = ChecklistItemResposta::where('checklist_id', $checklist_id)->where('checklist_item_id', $this->id)->first();
+        return ($resposta) ? $resposta->concluido : 0;
     }
 
     public static function boot() {

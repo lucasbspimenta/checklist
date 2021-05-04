@@ -23,13 +23,15 @@
                     <i class="fas fa-chevron-left md:mr-2"></i>
                     <div class="hidden md:inline-block">Voltar</div>
                 </a>
+            @if($agenda->checklist->concluido != 1)
                 <button 
                     onClick="$('#form_checklist').submit()"
                     class="px-3 font-sans text-sm text-white border border-solid border-caixaLaranja bg-caixaLaranja bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" >
                     <i class="fas fa-save md:mr-2"></i>
                     <div class="hidden md:inline-block">Gravar</div>
                 </button>
-                <livewire:checklist.botao-finalizar :checklist="$agenda->checklist"/>   
+                <livewire:checklist.botao-finalizar :checklist="$agenda->checklist"/> 
+            @endif  
             </div>
         </div>
     </nav>
@@ -146,6 +148,11 @@
         @if(session()->has('mensagem_sucesso'))
             toastr.success("{!! session('mensagem_sucesso') !!}");
             {!! Session::forget('mensagem_sucesso') !!}
+        @endif
+
+        @if(session()->has('mensagem_error'))
+            toastr.error("{!! session('mensagem_error') !!}");
+            {!! Session::forget('mensagem_error') !!}
         @endif
 
         function AdicionarDemanda(item_id) 

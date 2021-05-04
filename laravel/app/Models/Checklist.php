@@ -44,6 +44,8 @@ class Checklist extends Model
     public function getMacroitensAttribute()
     {
         return ChecklistItem::whereIn('id', $this->ids_itens_pais())->get();
+
+        //return ChecklistItemResposta::whereIn('checklist_item_id', $this->ids_itens_pais())->get();
     }
 
     public function getFotosObrigatoriasAttribute() 
@@ -136,3 +138,4 @@ class Checklist extends Model
     }
 
 }
+
