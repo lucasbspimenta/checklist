@@ -32,6 +32,8 @@ class FotosUpload extends Component
 
         $this->photo = $image;
         $this->save();
+
+        $this->emit('atualizaProgressoChecklist');
     }
 
     public function excluirFoto() 
@@ -47,6 +49,8 @@ class FotosUpload extends Component
         $this->resposta->save();
 
         $this->photo = null;
+
+        $this->emit('atualizaProgressoChecklist');
     }
 
     public function save()
@@ -61,6 +65,8 @@ class FotosUpload extends Component
 
         $this->resposta->foto = $this->photo;
         $this->resposta->save();
+
+        $this->emit('atualizaProgressoChecklist');
     }
 }
 

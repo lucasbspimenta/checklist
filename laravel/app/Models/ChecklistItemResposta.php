@@ -39,7 +39,7 @@ class ChecklistItemResposta extends Model
 
     public function getRespostaAttribute($value) {
 
-        if($value != -1 && $this->demandas_count > 0)
+        if($value !== -1 && $this->demandas_count > 0)
             return -1;
 
         return $this->value;

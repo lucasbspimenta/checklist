@@ -28,7 +28,8 @@
                     class="px-3 font-sans text-sm text-white border border-solid border-caixaLaranja bg-caixaLaranja bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" >
                     <i class="fas fa-save md:mr-2"></i>
                     <div class="hidden md:inline-block">Gravar</div>
-                </button>        
+                </button>
+                <livewire:checklist.botao-finalizar :checklist="$agenda->checklist"/>   
             </div>
         </div>
     </nav>
@@ -183,6 +184,10 @@
             });
         }
         
+
+        document.addEventListener('DOMContentLoaded', function() {
+            tippy('[data-tippy-content]');
+        });
         
     </script>   
 @endpush
