@@ -8,6 +8,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Scopes\UnidadeScope;
 
+use Auth;
+
 class Agenda extends Model
 {
     use HasFactory;
@@ -32,7 +34,7 @@ class Agenda extends Model
 
     public function checklist()
     {
-        return $this->hasOne(Checklist::class)->withDefault();
+        return $this->hasOne(Checklist::class)->withCount('demandas')->withDefault();
     }
 
     public function getInicioFormatadoAttribute() 
@@ -80,7 +82,6 @@ class Agenda extends Model
  
         static::addGlobalScope(new UnidadeScope);
 
-        /*
         static::creating(function ($model) {
             $model->created_by = Auth::id();
             $model->updated_by = Auth::id();
@@ -88,6 +89,6 @@ class Agenda extends Model
         static::updating(function ($model) {
             $model->updated_by = Auth::id();
         });
-        */
+        
     }
 }

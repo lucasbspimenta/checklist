@@ -17,8 +17,12 @@ class CreateChecklistItemDemandasTable extends Migration
 
             $table->id();
 
+            $table->char('migracao')->default('P'); // p = Pendente, C = Concluída
+
             $table->unsignedBigInteger('sistema_id');
             $table->foreign('sistema_id')->references('id')->on('demanda_sistemas');
+
+            $table->string('sistema_item_id')->nullable();
 
             $table->integer('demanda_id')->nullable();
             $table->string('demanda_url')->nullable();

@@ -5,8 +5,9 @@ require('./select2ptBR');
 require('./pikaday');
 require('./datatables');
 require('./modal');
-require('./sweetAlert2.js');
-require('./pace.js');
-require('./toastr.js');
+require('./sweetAlert2');
+require('./pace');
+require('./toastr');
+require('./tippy');
 import 'alpinejs';
 

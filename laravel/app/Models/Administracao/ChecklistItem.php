@@ -5,6 +5,8 @@ namespace App\Models\Administracao;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class ChecklistItem extends Model
 {
     use HasFactory;
@@ -26,6 +28,14 @@ class ChecklistItem extends Model
 
         static::deleting(function($item) { // before delete() method call this
             $item->itensfilhos()->delete();
+        });
+
+        static::creating(function ($model) {
+            $model->created_by = Auth::id();
+            $model->updated_by = Auth::id();
+        });
+        static::updating(function ($model) {
+            $model->updated_by = Auth::id();
         });
     }
 }

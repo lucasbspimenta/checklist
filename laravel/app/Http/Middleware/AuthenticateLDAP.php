@@ -31,11 +31,12 @@ class AuthenticateLDAP
             Auth::login($user);
             return $next($request);
         }
+
         return response('Não autorizado!', 403);
     }
 
     private function getUserEnv() {
-        $matricula = env('AUTH_USER');
+        $matricula = env('USUARIO_TESTE');
         $user = User::where('matricula', '=', $matricula)->first();
         return $user;
     }

@@ -20,29 +20,33 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda']);
+Route::middleware(['web', 'auth.caixa'])->group(function () {
 
-Route::get('/checklist',                                [ChecklistController::class, 'index'])->name('checklist.index');
-Route::match(['get', 'post'],'/checklist/{agenda_id}',  [ChecklistController::class, 'show'])->name('checklist.edit');
-Route::delete('/checklist',                             [ChecklistController::class, 'delete'])->name('checklist.delete');
+    Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda']);
 
-Route::prefix('administracao')->name('adm.')->group(function () {
+    Route::get('/checklist',                                [ChecklistController::class, 'index'])->name('checklist.index');
+    Route::match(['get', 'post'],'/checklist/{agenda_id}',  [ChecklistController::class, 'show'])->name('checklist.edit');
+    Route::delete('/checklist',                             [ChecklistController::class, 'delete'])->name('checklist.delete');
 
-    Route::get('/tipodeagendamento', function () {
-        return view('pages.administracao.tipodeagendamento');
-    })->name('tipodeagendamento');
+    Route::prefix('administracao')->name('adm.')->group(function () {
 
-    Route::get('/checklist', function () {
-        return view('pages.administracao.checklistitens');
-    })->name('checklist');
+        Route::get('/tipodeagendamento', function () {
+            return view('pages.administracao.tipodeagendamento');
+        })->name('tipodeagendamento');
 
+        Route::get('/checklist', function () {
+            return view('pages.administracao.checklistitens');
+        })->name('checklist');
+
+    });
+
+    Route::get('/artisan', function () {
+        $exitCode = Artisan::call('key:generate');
+        //ddd($exitCode);
+        //$exitCode = Artisan::call('key:generate');
+        //ddd($exitCode);
+        //$exitCode = Artisan::call('migrate:fresh --seed');
+        //ddd($exitCode);
+    })->name('artisan');
+    
 });
-
-Route::get('/artisan', function () {
-    $exitCode = Artisan::call('key:generate');
-    //ddd($exitCode);
-    //$exitCode = Artisan::call('key:generate');
-    //ddd($exitCode);
-    //$exitCode = Artisan::call('migrate:fresh --seed');
-    //ddd($exitCode);
-})->name('artisan');

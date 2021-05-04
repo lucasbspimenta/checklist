@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
+use Auth;
+
 class DemandaSistema extends Model
 {
     use HasFactory;
@@ -115,10 +117,21 @@ class DemandaSistema extends Model
         return null;
     }
 
+    public function getItemById($id) {
+        $db = DB::connection($this->conexao);
+
+        $sql = 'select '. $this->itens_campo_id .' as id, '. $this->itens_campo_texto .' as nome  
+                from '. $this->itens_table .' 
+                where '. $this->itens_campo_id.'=' . $id;
+
+        //ddd($sql);
+
+        return collect($db->select($sql))->first();
+    }
+
     public static function boot() {
         parent::boot();
 
-        /*
         static::creating(function ($model) {
             $model->created_by = Auth::id();
             $model->updated_by = Auth::id();
@@ -126,6 +139,5 @@ class DemandaSistema extends Model
         static::updating(function ($model) {
             $model->updated_by = Auth::id();
         });
-        */
     }
 }

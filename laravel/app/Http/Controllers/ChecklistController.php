@@ -33,8 +33,10 @@ class ChecklistController extends Controller
             case 'POST':
 
                 ChecklistServices::registrarItens($request);
-                $agenda->checklist->fresh('respostas');
-                $agenda->refresh();
+                return redirect()
+                        ->route('checklist.edit',['agenda_id'=>$request->agenda_id])
+                        ->with('mensagem_sucesso','Checklist gravado com sucesso!')
+                        ->with('redirect_to', $request->redirect_to);
 
             break;
     

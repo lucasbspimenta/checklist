@@ -32,3 +32,35 @@ Stack trace:
 #3 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php(732): Illuminate\Database\Connection->tryAgainIfCausedByLostConnection(Object(Illuminate\Database\QueryException), 'select * from [...', Array, Object(Closure))
 #4 C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Databa in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 338
 [13-Apr-2021 16:00:36 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\vendor\laravel\framework\src\Illuminate\Database\Connection.php on line 671
+[28-Apr-2021 21:30:32 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08001]: [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: The wait operation timed out.
+ in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:70
+Stack trace:
+#0 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(70): PDO->__construct('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
+#1 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
+#2 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\SqlServerConnector.php(32): Illuminate\Database\Connectors\Connector->createConnection('sqlsrv:Server=1...', Array, Array)
+#3 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\ConnectionFactory. in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 70
+[28-Apr-2021 21:30:32 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 46
+[04-May-2021 09:13:57 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08001]: [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: The wait operation timed out.
+ in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:70
+Stack trace:
+#0 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(70): PDO->__construct('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
+#1 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
+#2 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\SqlServerConnector.php(32): Illuminate\Database\Connectors\Connector->createConnection('sqlsrv:Server=1...', Array, Array)
+#3 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\ConnectionFactory. in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 70
+[04-May-2021 09:13:57 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 46
+[04-May-2021 13:39:15 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08001]: [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: The wait operation timed out.
+ in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:70
+Stack trace:
+#0 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(70): PDO->__construct('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
+#1 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
+#2 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\SqlServerConnector.php(32): Illuminate\Database\Connectors\Connector->createConnection('sqlsrv:Server=1...', Array, Array)
+#3 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\ConnectionFactory. in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 70
+[04-May-2021 13:39:15 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 46
+[04-May-2021 13:39:51 America/Sao_Paulo] PHP Warning:  Uncaught PDOException: SQLSTATE[08001]: [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: No connection could be made because the target machine actively refused it.
+ in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:70
+Stack trace:
+#0 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(70): PDO->__construct('sqlsrv:Server=l...', 's553101', 'FoA9C5Sqrc', Array)
+#1 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('sqlsrv:Server=l...', 's553101', 'FoA9C5Sqrc', Array)
+#2 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\SqlServerConnector.php(32): Illuminate\Database\Connectors\Connector->createConnection('sqlsrv:Server=l...', Array, Array)
+#3 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Ill in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 70
+[04-May-2021 13:39:51 America/Sao_Paulo] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 46

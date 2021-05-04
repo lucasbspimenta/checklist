@@ -4,6 +4,8 @@
 @import "~toastr/build/toastr.min.css";
 @import "~magnific-popup/dist/magnific-popup.css";
 @import '~glory-modal/dist/gmodal.css';
+@import '~tippy.js/dist/tippy.css';
+@import '~tippy.js/animations/scale.css';
 @import "./calendar.css";
 @import "./select2.css";
 @import "./datatables.css";

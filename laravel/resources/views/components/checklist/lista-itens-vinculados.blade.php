@@ -28,6 +28,7 @@
                     </td>
                 </tr>
                 @foreach($checklist->respostas->where('item_pai_id', $macroitem->id)->sortBy('ordem') as $item_filho)
+                    
                     <tr class="border-b border-r exibirLinhasFilhas{{ $macroitem->id }} hover:bg-gray-50" x-data="{situacao_{{ $item_filho->id }}: {{ $item_filho->resposta ?? '\'\'' }}}">
                         <td class="w-auto px-2 py-2 whitespace-no-wrap border-0 border-l-8" style="border-color: {{ $macroitem->cor }}">
                             <div class="w-full px-2 border-0 border-l-4" style="border-color: {{ $macroitem->cor }}">
@@ -48,11 +49,11 @@
                             <div class="switch switch--horizontal"  x-init="$watch('situacao_{{ $item_filho->id }}', value => console.log(value))">
                                 <input {{ $item_filho->resposta == -1 ? 'checked' : '' }} id="radio-inconforme-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="-1" x-model="situacao_{{ $item_filho->id }}" />
                                 <label for="radio-inconforme-{{ $item_filho->id }}">Inconforme</label>
-                                <input {{ $item_filho->resposta == 1 ? 'checked' : '' }} id="radio-conforme-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="1" x-model="situacao_{{ $item_filho->id }}"/>
+                                <input {{ ($item_filho->demandas_count && $item_filho->demandas_count > 0) ? 'disabled' : '' }} {{ $item_filho->resposta == 1 ? 'checked' : '' }} id="radio-conforme-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="1" x-model="situacao_{{ $item_filho->id }}"/>
                                 <label for="radio-conforme-{{ $item_filho->id }}">Conforme</label>
-                                <input {{ $item_filho->resposta == 0 ? 'checked' : '' }} id="radio-naoseaplica-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="0" x-model="situacao_{{ $item_filho->id }}"/>
+                                <input {{ ($item_filho->demandas_count && $item_filho->demandas_count > 0) ? 'disabled' : '' }} {{ $item_filho->resposta == 0 ? 'checked' : '' }} id="radio-naoseaplica-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="0" x-model="situacao_{{ $item_filho->id }}"/>
                                 <label for="radio-naoseaplica-{{ $item_filho->id }}">Não se aplica</label>
-                                <input {{ is_null($item_filho->resposta) ? 'checked' : '' }} class="hidden" id="radio-naoselecionado-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="" x-model="situacao_{{ $item_filho->id }}"/>
+                                <input {{ ($item_filho->demandas_count && $item_filho->demandas_count > 0) ? 'disabled' : '' }} {{ is_null($item_filho->resposta) ? 'checked' : '' }} class="hidden" id="radio-naoselecionado-{{ $item_filho->id }}" type="radio" name="resposta[{{ $item_filho->id }}]" value="" x-model="situacao_{{ $item_filho->id }}"/>
                             </div>
                         </td>
                         <td class="px-2 py-2 whitespace-no-wrap w-36">

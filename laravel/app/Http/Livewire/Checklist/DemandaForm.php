@@ -10,10 +10,10 @@ use App\Models\ChecklistItemDemanda;
 
 class DemandaForm extends Component
 {
-    public $sistemas;
-    public $categorias;
-    public $subcategorias;
-    public $itens;
+    public $sistemas = [];
+    public $categorias = [];
+    public $subcategorias = [];
+    public $itens = [];
     public $checklistItem;
 
     public $sistema;
@@ -84,10 +84,13 @@ class DemandaForm extends Component
 
         ChecklistItemDemanda::create([
             'sistema_id' => $this->sistemaSelecionado,
+            'sistema_item_id' => $this->itemSelecionado,
             'checklist_item_resposta_id' => $this->checklistItem->id,
             'descricao' => $this->descricao,
         ]);
 
+        $this->fechouModal();
+        
         $this->dispatchBrowserEvent('triggerDemandaGravadaSucesso');
     }
 }

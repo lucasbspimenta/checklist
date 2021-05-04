@@ -8,9 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Administracao\ChecklistItem;
 
+use Auth;
+
 class ChecklistItemResposta extends Model
 {
     use HasFactory;
+
+    protected $withCount = ['demandas'];
 
     protected $fillable = [
 		'checklist_item_id'
@@ -26,6 +30,19 @@ class ChecklistItemResposta extends Model
     public function item()
     {
         return $this->hasOne(ChecklistItem::class,'id','checklist_item_id');
+    }
+
+    public function demandas()
+    {
+        return $this->hasMany(ChecklistItemDemanda::class,'checklist_item_resposta_id','id');
+    }
+
+    public function getRespostaAttribute($value) {
+
+        if($value != -1 && $this->demandas_count > 0)
+            return -1;
+
+        return $this->value;
     }
 
     public function getConcluidoAttribute() {
@@ -51,7 +68,7 @@ class ChecklistItemResposta extends Model
     public static function boot() {
         parent::boot();
 
-        /*
+        
         static::creating(function ($model) {
             $model->created_by = Auth::id();
             $model->updated_by = Auth::id();
@@ -59,6 +76,6 @@ class ChecklistItemResposta extends Model
         static::updating(function ($model) {
             $model->updated_by = Auth::id();
         });
-        */
+        
     }
 }

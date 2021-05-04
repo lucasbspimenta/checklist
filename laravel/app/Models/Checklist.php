@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Administracao\ChecklistItem;
 
+use Auth;
+
 class Checklist extends Model
 {
     use HasFactory;
@@ -62,7 +64,7 @@ class Checklist extends Model
     {
         return $this->hasMany(ChecklistItemResposta::class)
                 ->leftJoin(app(ChecklistItem::class)->getTable(), app(ChecklistItemResposta::class)->getTable().'.checklist_item_id', '=', app(ChecklistItem::class)->getTable() . '.id')
-                ->select(app(ChecklistItemResposta::class)->getTable().'.*', 'item_pai_id');
+                ->select(app(ChecklistItemResposta::class)->getTable().'.*', 'item_pai_id')->withCount('demandas');
     }
     
 
@@ -78,6 +80,21 @@ class Checklist extends Model
             'id', // Local key on the projects table...
             'checklist_item_id' // Local key on the environments table...
         )->with('itempai');
+    }
+
+    public function demandas()
+    {
+ 
+        return $this->hasManyThrough(
+            ChecklistItemDemanda::class,
+            ChecklistItemResposta::class,
+            'checklist_id', // Foreign key on the environments table...
+            'checklist_item_resposta_id', // Foreign key on the deployments table...
+            'id', // Local key on the projects table...
+            'id' // Local key on the environments table...
+        )->with('resposta');
+
+        
     }
 
     protected static function booted()
@@ -107,7 +124,7 @@ class Checklist extends Model
             $checklist->respostas()->delete();
         });
 
-        /*
+        
         static::creating(function ($model) {
             $model->created_by = Auth::id();
             $model->updated_by = Auth::id();
@@ -115,7 +132,7 @@ class Checklist extends Model
         static::updating(function ($model) {
             $model->updated_by = Auth::id();
         });
-        */
+        
     }
 
 }

@@ -19,7 +19,7 @@
                 </h1>
             </div>
             <div class="flex items-center">
-                <a href="{{ url()->previous() }}" class="px-3 mr-2 font-sans text-sm leading-6 text-gray-700 border border-solid border-caixaCinza bg-caixaCinza bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" >
+                <a href="{{ session('redirect_to') ?? url()->previous() }}" class="px-3 mr-2 font-sans text-sm leading-6 text-gray-700 border border-solid border-caixaCinza bg-caixaCinza bg-opacity-90 h-3/4 hover:bg-opacity-100 focus:outline-none" >
                     <i class="fas fa-chevron-left md:mr-2"></i>
                     <div class="hidden md:inline-block">Voltar</div>
                 </a>
@@ -74,6 +74,7 @@
                     action="{{ route('checklist.edit', $agenda->id) }}"
                 >
                     @csrf
+                    <input type="hidden" name="redirect_to" value="{{ session('redirect_to') ?? url()->previous() }}" />
                     <x-checklist.lista-itens-vinculados :checklist="$agenda->checklist"/>
                 </form>
             </div>
@@ -138,7 +139,7 @@
         var modalAdicionarDemanda = new Gmodal(elementoAdicionarDemanda);
 
         elementoAdicionarDemanda.addEventListener('gmodal:beforeclose', function(evt) {
-            Livewire.emitTo('checklist.demanda-form', 'fechouModal');
+            Livewire.emit('fechouModal');
         })
 
         @if(session()->has('mensagem_sucesso'))
@@ -148,15 +149,39 @@
 
         function AdicionarDemanda(item_id) 
         {
-            Livewire.emitTo('checklist.demanda-form', 'abriuModal',item_id);
+            Livewire.emit('abriuModal',item_id);
             modalAdicionarDemanda.open();
         }
 
         window.addEventListener('triggerDemandaGravadaSucesso', event => {
             modalAdicionarDemanda.close();
             toastr.success('Demanda incluída com sucesso!');
+            Livewire.emit('atualizaListaDemandas');
         })
 
+        window.addEventListener('triggerDemandaExcluidaSucesso', (event) => {
+        toastr.success('Demanda excluída com sucesso!');
+    })
+
+        function ConfirmaExclusaoDemanda(id) {
+
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: "A demanda será excluída",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sim, tenho certeza!',
+                cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+                    Livewire.emit('triggerDeleteDemanda', id);
+                } else {
+                    console.log("Canceled");
+                }
+            });
+        }
         
         
     </script>   

@@ -82,7 +82,14 @@
             eventClick: function(info) {
                 console.log(info.event.id);
                 Livewire.emit('abrirModalVerAgenda', info.event.id);
-            }
+            },
+            eventDidMount: function(info) {
+
+                var tooltip = tippy(info.el, {
+                    content: '<ul><li>'+ info.event.extendedProps.descricao +'</li></ul>',
+                    allowHTML: true,
+                });
+            },
         });
 
         function alterarAgendamento(info, delta) {
