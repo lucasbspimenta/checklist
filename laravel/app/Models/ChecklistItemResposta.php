@@ -39,10 +39,11 @@ class ChecklistItemResposta extends Model
 
     public function getRespostaAttribute($value) {
 
-        if($value !== -1 && $this->demandas_count > 0)
-            return -1;
 
-        return $this->value;
+        if($value != '-1' && $this->demandas_count > 0)
+            return '-1';
+
+        return $value;
     }
 
     public function getConcluidoAttribute() {
@@ -60,7 +61,7 @@ class ChecklistItemResposta extends Model
                                                 END
                                 FROM [checklist_item_respostas] cir
                                 INNER JOIN [checklist_items] ci ON cir.checklist_item_id = ci.id
-                                CROSS APPLY (SELECT COUNT(*) as total_demandas FROM [checklist_item_demandas]) as total_demandas
+                                CROSS APPLY (SELECT COUNT(*) as total_demandas FROM [checklist_item_demandas] WHERE checklist_item_resposta_id = cir.id) as total_demandas
                                 WHERE cir.id = ?", [$this->id]);
         return $retorno[0]->concluido ?? null;
     }
