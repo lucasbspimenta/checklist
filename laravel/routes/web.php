@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ChecklistController;
+use App\Http\Controllers\Administracao\GuiaController as AdmGuiaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Route::get('/', function () {
 
 Route::middleware(['web', 'auth.caixa'])->group(function () {
 
+    Route::get('/guia', function () {
+        return view('pages.guia');
+    })->name('guia');
+
     Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda']);
 
     Route::get('/checklist',                                [ChecklistController::class, 'index'])->name('checklist.index');
@@ -37,6 +42,8 @@ Route::middleware(['web', 'auth.caixa'])->group(function () {
         Route::get('/checklist', function () {
             return view('pages.administracao.checklistitens');
         })->name('checklist');
+
+        Route::resource('/guia', AdmGuiaController::class);
 
     });
 
