@@ -20,7 +20,7 @@ class CreateGuiaQATable extends Migration
             $table->foreign('guia_id')->references('id')->on('guia')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('pergunta');
-            $table->string('respota')->nullable();
+            $table->string('resposta')->nullable();
 
             $table->char('situacao',1)->default('A');
 

@@ -6,6 +6,7 @@
 @import '~glory-modal/dist/gmodal.css';
 @import '~tippy.js/dist/tippy.css';
 @import '~tippy.js/animations/scale.css';
+@import '~dropzone/dist/dropzone.css';
 @import "./calendar.css";
 @import "./select2.css";
 @import "./datatables.css";

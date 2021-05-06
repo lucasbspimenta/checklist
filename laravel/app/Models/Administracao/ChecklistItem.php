@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\ChecklistItemResposta;
+use App\Models\Guia;
 
 use Auth;
 
@@ -23,6 +24,11 @@ class ChecklistItem extends Model
     public function itempai()
     {
         return $this->belongsTo(ChecklistItem::class, 'item_pai_id');
+    }
+
+    public function guia() {
+
+        return $this->hasOne(Guia::class, 'checklist_item_id');
     }
 
     public function concluidoNoChecklist($checklist_id) {

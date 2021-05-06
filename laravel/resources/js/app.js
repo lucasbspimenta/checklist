@@ -9,5 +9,6 @@ require('./sweetAlert2');
 require('./pace');
 require('./toastr');
 require('./tippy');
+require('./dropzone');
 import 'alpinejs';
 
