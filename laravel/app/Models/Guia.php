@@ -35,11 +35,20 @@ class Guia extends Model
         return $this->hasMany(GuiaQA::class);
     }
 
+    public function getQAsArrayFormAttribute() {
+        $retorno_array = [];
+        foreach($this->QAs as $qa) {
+            $retorno_array[] = array('pergunta' => $qa['pergunta'], 'resposta' => $qa['resposta']);
+        }
+        return $retorno_array;
+    }
+
     public static function boot() {
         parent::boot();
 
         static::deleting(function($guia) {
             $guia->imagens()->delete();
+            $guia->QAs()->delete();
         });
 
         

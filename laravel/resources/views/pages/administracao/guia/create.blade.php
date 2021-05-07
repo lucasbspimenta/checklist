@@ -42,7 +42,7 @@
                             @forelse ($itens as $item)
                                 <option value="{{ $item->id }}">{{ $item->nome }}</option>
                             @empty
-                                <option value="" >Nenhum item cadastrado</option>
+                                <option value="" >Nenhum item sem guia foi localizado</option>
                             @endforelse
                         </select>
                         @error('checklist_item_id') <span class="text-red-500">{{ $message }}</span>@enderror
@@ -83,6 +83,9 @@
             maxFilesize: 2,
             addRemoveLinks: true,
             acceptedFiles: ".jpeg,.jpg,.png",
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
             /*
             thumbnail: function (file, dataUrl) {
                 if (file.previewElement) {

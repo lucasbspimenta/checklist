@@ -9,8 +9,8 @@ use App\Models\GuiaQA;
 class QA extends Component
 {
     public $qas = [];
-    public $pergunta;
-    public $resposta;
+    public $pergunta = '';
+    public $resposta = '';
 
     public function rules() {
         return [

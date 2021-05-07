@@ -9,7 +9,7 @@
                 <svg class="w-2 h-2 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg>
             </li>
             <li class="flex items-center">
-                <a href="{{ route('guia') }}">Guia</a>
+                <a href="{{ route('adm.guia.index') }}">Guia</a>
             </li>
         </ol>
     </nav>
@@ -28,16 +28,36 @@
 <div class="container px-2 py-3 mx-auto h-4/5">
     <div class="grid grid-cols-6 gap-4">
         @forelse ($guias as $guia)
-            <a href="#" class="opacity-70 hover:opacity-100">
+        <div class="block">
+            
                 <div class="flex flex-col items-center justify-center w-full mx-auto my-2 h-28">
                     <div style="background-image: url({{ $guia->imagens->first()->imagem }}); border-color: {{ $guia->item->cor }}"
                         class="w-full h-64 bg-gray-300 bg-center bg-cover border rounded-sm">
                     </div>
                     <div class="w-4/5 h-24 -mt-4 overflow-hidden border border-l-8 rounded-sm bg-gray-50" style="border-color: {{ $guia->item->cor }}">
-                        <div class="py-2 text-sm font-bold tracking-wide text-center" style="color: {{ $guia->item->cor }}">{{ $guia->item->nome }}</div>
+                        <div class="py-2 text-sm font-bold tracking-wide text-center" style="color: {{ $guia->item->cor }}">
+                            <a href="{{ route('adm.guia.edit', [$guia]) }}" class="opacity-70 hover:opacity-100">
+                                {{ $guia->item->nome }}
+                            </a>
+                            <div class="top-0 right-0 float-right w-6 h-6">
+                                <form>
+                                    
+                                </form>
+                                <form
+                                    action="{{ route('adm.guia.destroy', [$guia]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="return confirm('{{ __('Are you sure?') }}')" class="btn btn-sm btn-danger" type="submit">
+                                        <i class="fas fa-trash md:mr-2"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </a>
+            
+        </div>
         @empty
             <p>Nenhum guia cadastrado</p>
         @endforelse

@@ -21,20 +21,27 @@
         <span class="text-gray-700"><b>Perguntas e Respostas incluídas</b></span>
         @forelse($qas as $key_qa => $qa_incluida)
             @if($qa_incluida)
-                <div class="border shadown w-full mb-2">
-                    <div class="p-2">
-                        <span class="mr-2"><b>P:</b></span>
-                        {{ $qa_incluida['pergunta'] ?? '' }}
-                        <input type="hidden" name="pergunta_{{$key_qa}}" value="{{ $qa_incluida['pergunta'] ?? '' }}" />
-                        <button class="text-red-500 float-right" wire:click.prevent="removePergunta({{ $key_qa }})">remover</button>
+                <div class="flex justify-between w-full mb-2 border shadown">
+                    
+                    <div class="block">
+                        <div class="p-2">
+                            <span class="mr-2"><b>P:</b></span>
+                            {{ $qa_incluida['pergunta'] ?? '' }}
+                            <input type="hidden" name="pergunta_{{$key_qa}}" value="{{ $qa_incluida['pergunta'] ?? '' }}" />
+                            
+                        </div>
+                        @if($qa_incluida['resposta'])
+                        <div class="p-2">
+                            <span class="mr-2"><b>R:</b></span>
+                            {{ $qa_incluida['resposta'] ?? '' }}
+                            <input type="hidden" name="resposta_{{$key_qa}}" value="{{ $qa_incluida['resposta'] ?? '' }}" />
+                        </div>
+                        @endif
                     </div>
-                    @if($qa_incluida['resposta'])
-                    <div class="p-2">
-                        <span class="mr-2"><b>R:</b></span>
-                        {{ $qa_incluida['resposta'] ?? '' }}
-                        <input type="hidden" name="resposta_{{$key_qa}}" value="{{ $qa_incluida['resposta'] ?? '' }}" />
+                    <div class="block">
+                        <a href="#" class="text-red-500" wire:click.prevent="removePergunta({{ $key_qa }})">remover</a>
                     </div>
-                    @endif
+                    
                 </div>
             @endif
         @empty

@@ -23,10 +23,21 @@ class GuiaStoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'checklist_item_id' => ['required','integer','unique:guia'],
+        $rules = [
+            'checklist_item_id' => ['required','integer','unique:guia'],  
             'descricao' => ['required','string']
         ];
+
+        if ($this->getMethod() == 'PUT') {
+            $rules = [
+                'checklist_item_id' => ['required','integer'],  
+                'descricao' => ['required','string']
+            ];
+        }
+
+        
+
+        return $rules;
     }
 
     public function messages()
