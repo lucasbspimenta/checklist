@@ -92,5 +92,6 @@ class DemandaForm extends Component
         $this->fechouModal();
         
         $this->dispatchBrowserEvent('triggerDemandaGravadaSucesso');
+        $this->emit('atualizaProgressoChecklist');
     }
 }

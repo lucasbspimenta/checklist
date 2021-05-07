@@ -139,7 +139,11 @@
 @push('scripts')
     <script>
         var elementoAdicionarDemanda = document.querySelector('#modalAdicionarDemanda');
-        var modalAdicionarDemanda = new Gmodal(elementoAdicionarDemanda);
+        var modalAdicionarDemanda = new Gmodal(elementoAdicionarDemanda,{
+  backdrop: true,
+  closeBackdrop: false,
+  keyboard: true
+});
 
         elementoAdicionarDemanda.addEventListener('gmodal:beforeclose', function(evt) {
             Livewire.emit('fechouModal');
