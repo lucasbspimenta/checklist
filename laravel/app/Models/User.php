@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\UserPerfil;
+
 use Auth;
 
 class User extends Authenticatable
@@ -63,6 +65,14 @@ class User extends Authenticatable
         if(in_array($this->perfil->perfil_codigo, $perfis_permitidos))
             return true;
         
+        return false;
+    }
+
+    public function getIsGestorAttribute() {
+
+        if (UserPerfil::where('equipe_gestor', $this->matricula)->exists())
+           return true;
+ 
         return false;
     }
 }

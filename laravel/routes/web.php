@@ -23,6 +23,7 @@ use App\Http\Controllers\Administracao\GuiaController as AdmGuiaController;
 Route::middleware(['web', 'auth.caixa'])->group(function () {
 
     Route::get('/', function () {
+        dump(Auth::user()->isGestor);
         return view('index');
     })->name('index');
 
