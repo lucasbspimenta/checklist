@@ -35,12 +35,12 @@ class User extends Authenticatable
 
     public function unidadeAdministrativa()
     {
-        return $this->hasOne(Unidade::class,'codigo','unidade')->withDefault();
+        return $this->hasOne(Unidade::class,'codigo','unidade')->withoutGlobalScope('App\Scopes\UnidadeScope')->withDefault();
     }
 
     public function unidadeFisica()
     {
-        return $this->hasOne(Unidade::class,'codigo','fisica')->withDefault();
+        return $this->hasOne(Unidade::class,'codigo','fisica')->withoutGlobalScope('App\Scopes\UnidadeScope')->withDefault();
     }
 
     public function perfil()

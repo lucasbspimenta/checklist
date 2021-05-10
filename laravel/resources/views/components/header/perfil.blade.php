@@ -11,30 +11,49 @@
             <div class="p-2">
                 <h3 class="text-base font-medium leading-6 text-center text-gray-900">{{ Str::title(Auth::user()->name) }}</h3>
                 <div class="text-sm font-semibold text-center text-gray-400">
-                    <p> - </p>
+                    <p>{{ Str::title(Auth::user()->perfil->perfil_nome) }}</p>
                 </div>
                 <table class="my-2 text-sm">
-                    <tbody><tr>
-                        <td class="px-2 py-1 font-semibold text-gray-500">Função</td>
-                        <td class="px-2 py-1 md:whitespace-nowrap">{{ Str::title(Auth::user()->funcao) }}</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 py-1 font-semibold text-gray-500">Cargo</td>
-                        <td class="px-2 py-1 md:whitespace-nowrap">{{ Str::title(Auth::user()->cargo) }}</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 py-1 font-semibold text-gray-500">Unidade Adm.</td>
-                        <td class="px-2 py-1 md:whitespace-nowrap">{{ Auth::user()->unidadeAdministrativa->nomeCompleto }}</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 py-1 font-semibold text-gray-500">Unidade Física</td>
-                        <td class="px-2 py-1 md:whitespace-nowrap">{{ Auth::user()->unidadeFisica->nomeCompleto }}</td>
-                    </tr>
-                </tbody></table>
+                    <tbody>
+                        <tr>
+                            <td class="px-2 py-1 font-semibold text-gray-500">Equipe</td>
+                            <td class="px-2 py-1 md:whitespace-nowrap">{{ Str::title(Auth::user()->perfil->equipe_nome) }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-2 py-1 font-semibold text-gray-500">Gestor</td>
+                            <td class="px-2 py-1 md:whitespace-nowrap">
+                                <a target="_blank" href="https://teams.microsoft.com/l/chat/0/0?users={{ trim(Auth::user()->perfil->equipe_gestor) }}@corp.caixa.gov.br">
+                                    {{ Str::title(Auth::user()->perfil->equipe_gestor) }}
+                                    <img class="inline-block h-4" src="{{ asset('images/teams_16.png') }}" />
+                                </a>
+                            </td>
+                        </tr>
+                        <!--
+                            <tr>
+                                <td class="px-2 py-1 font-semibold text-gray-500">Função</td>
+                                <td class="px-2 py-1 md:whitespace-nowrap">{{ Str::title(Auth::user()->funcao) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-2 py-1 font-semibold text-gray-500">Cargo</td>
+                                <td class="px-2 py-1 md:whitespace-nowrap">{{ Str::title(Auth::user()->cargo) }}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-2 py-1 font-semibold text-gray-500">Unidade Adm.</td>
+                                <td class="px-2 py-1 md:whitespace-nowrap">{{ Auth::user()->unidadeAdministrativa->nomeCompleto }}</td>
+                            </tr>
+                            <tr>
+                                <td class="px-2 py-1 font-semibold text-gray-500">Unidade Física</td>
+                                <td class="px-2 py-1 md:whitespace-nowrap">{{ Auth::user()->unidadeFisica->nomeCompleto }}</td>
+                            </tr>
+                        -->
+                    </tbody>
+                </table>
 
+                <!--
                 <div class="my-2 text-center">
                     <a class="text-sm font-medium text-caixaAzul hover:underline hover:text-caixaAzul" href="#">Abrir perfil</a>
                 </div>
+            -->
             </div>
         </div>
     </div>
