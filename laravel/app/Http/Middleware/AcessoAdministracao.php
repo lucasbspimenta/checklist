@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class AcessoAdministracao
 {
     /**
@@ -16,7 +18,7 @@ class AcessoAdministracao
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$this->auth->user()->isAdmin) {
+        if(!Auth::user()->isAdmin) {
             return redirect()->route('index');
         }
         return $next($request);
