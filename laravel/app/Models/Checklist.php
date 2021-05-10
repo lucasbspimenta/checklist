@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use App\Scopes\UnidadeScope;
 use App\Models\Administracao\ChecklistItem;
 
 use Auth;
@@ -121,6 +122,8 @@ class Checklist extends Model
 
     public static function boot() {
         parent::boot();
+
+        static::addGlobalScope(new UnidadeScope);
 
         static::deleting(function($checklist) {
             $checklist->respostas()->delete();

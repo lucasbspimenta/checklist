@@ -75,7 +75,7 @@
                             <td class="px-2 py-2">{{ $checklist->percentualDemandas }}</td>
                             <td class="w-1/5 px-2 py-2">
                                 <div class="flex flex-nowrap">
-                                    <a href="{{ route('checklist.edit', $checklist->agendamento->id) }}"
+                                    <a href="{{ route('checklist.edit', [$checklist->agendamento->id]) }}"
                                         class="px-3 font-sans text-sm bg-white border border-white border-solid text-caixaAzul hover:border-gray focus:outline-none" >
                                         @if ($checklist->concluido != 1)
                                             <i class="fas fa-edit"></i>

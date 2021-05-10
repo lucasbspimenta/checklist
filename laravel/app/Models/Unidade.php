@@ -8,8 +8,6 @@ use App\Scopes\UnidadeScope;
 
 class Unidade extends Model
 {
-    use HasFactory;
-
     protected $table = 'unidades';
 
     public function getNomeCompletoAttribute()
@@ -17,6 +15,7 @@ class Unidade extends Model
         return ($this->tipoPv) ? $this->tipoPv . ' ' . $this->nome : $this->nome;
     }
 
+    
     protected static function boot()
     {
         parent::boot();

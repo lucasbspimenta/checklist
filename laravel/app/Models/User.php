@@ -3,14 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
+use Auth;
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use Notifiable;
+
+    protected $with = ['perfil'];
+
 
     /**
      * The attributes that are mass assignable.
@@ -35,5 +39,30 @@ class User extends Authenticatable
     public function unidadeFisica()
     {
         return $this->hasOne(Unidade::class,'codigo','fisica')->withDefault();
+    }
+
+    public function perfil()
+    {
+        return $this->hasOne(UserPerfil::class,'matricula','matricula');
+    }
+
+    public function getIsAdminAttribute() {
+
+        $perfis_permitidos = array(env('PERFIL_GESTOR'), env('PERFIL_DESENVOLVEDOR'));
+ 
+        if(in_array($this->perfil->perfil_codigo, $perfis_permitidos))
+            return true;
+        
+        return false;
+    }
+
+    public function getIsRelogAttribute() {
+
+        $perfis_permitidos = array(env('PERFIL_RELOG'), env('PERFIL_DESENVOLVEDOR'));
+        
+        if(in_array($this->perfil->perfil_codigo, $perfis_permitidos))
+            return true;
+        
+        return false;
     }
 }

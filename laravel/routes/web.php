@@ -18,11 +18,13 @@ use App\Http\Controllers\Administracao\GuiaController as AdmGuiaController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+
 
 Route::middleware(['web', 'auth.caixa'])->group(function () {
+
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
 
     Route::post('/upload-image', [ImagemController::class, 'dropZone' ])->name('drag-drop');
 
@@ -34,9 +36,10 @@ Route::middleware(['web', 'auth.caixa'])->group(function () {
 
     Route::get('/checklist',                                [ChecklistController::class, 'index'])->name('checklist.index');
     Route::match(['get', 'post'],'/checklist/{agenda_id}',  [ChecklistController::class, 'show'])->name('checklist.edit');
+
     Route::delete('/checklist',                             [ChecklistController::class, 'delete'])->name('checklist.delete');
 
-    Route::prefix('administracao')->name('adm.')->group(function () {
+    Route::prefix('administracao')->name('adm.')->middleware(['web', 'auth.caixa','admin'])->group(function () {
 
         Route::get('/tipodeagendamento', function () {
             return view('pages.administracao.tipodeagendamento');
@@ -50,6 +53,7 @@ Route::middleware(['web', 'auth.caixa'])->group(function () {
 
     });
 
+    /*
     Route::get('/artisan', function () {
         $exitCode = Artisan::call('key:generate');
         //ddd($exitCode);
@@ -58,5 +62,5 @@ Route::middleware(['web', 'auth.caixa'])->group(function () {
         //$exitCode = Artisan::call('migrate:fresh --seed');
         //ddd($exitCode);
     })->name('artisan');
-    
+    */
 });

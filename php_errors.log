@@ -71,3 +71,4 @@ Stack trace:
 #1 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(46): Illuminate\Database\Connectors\Connector->createPdoConnection('sqlsrv:Server=1...', 's553101', 'FoA9C5Sqrc', Array)
 #2 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\SqlServerConnector.php(32): Illuminate\Database\Connectors\Connector->createConnection('sqlsrv:Server=1...', Array, Array)
 #3 C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\ConnectionFactory. in C:\inetpub\wwwroot\checklist\laravel\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php on line 70
+[08-May-2021 12:29:40 America/Sao_Paulo] PHP Fatal error:  Trait 'App\Models\HasFactory' not found in C:\inetpub\wwwroot\checklist\laravel\app\Models\User.php on line 14
