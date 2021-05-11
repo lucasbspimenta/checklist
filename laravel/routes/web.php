@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\ImagemController;
+use App\Http\Controllers\GuiaController;
 use App\Http\Controllers\Administracao\GuiaController as AdmGuiaController;
 
 /*
@@ -28,9 +29,7 @@ Route::middleware(['web', 'auth.caixa'])->group(function () {
 
     Route::post('/upload-image', [ImagemController::class, 'dropZone' ])->name('drag-drop');
 
-    Route::get('/guia', function () {
-        return view('pages.guia');
-    })->name('guia');
+    Route::resource('/guia',  GuiaController::class);
 
     Route::resource('/agenda', AgendaController::class)->names(['index' => 'agenda']);
 

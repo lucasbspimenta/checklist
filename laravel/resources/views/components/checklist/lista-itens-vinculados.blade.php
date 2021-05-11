@@ -8,6 +8,9 @@
                         @if( $macroitem->foto == 'S')
                             <i class="mx-2 font-bold text-gray-500 fas fa-camera"></i>
                         @endif
+                        @if( $macroitem->guia)
+                            <a class="popup-link-guia" href="{{ route('guia.show',[$macroitem->guia, "modal" => true]) }}"><i class="mx-2 font-bold text-azulCaixa fas fa-question-circle"></i></a>
+                        @endif
                         @if($macroitem->itensFilhos->count() > 0)
                             <div onClick="$('.exibirLinhasFilhas{{ $macroitem->id }}').toggleClass('hidden');" @click="exibirLinhasFilhas{{ $macroitem->id }} = !exibirLinhasFilhas{{ $macroitem->id }}" class="inline-block h-full px-3 font-sans text-sm leading-6 cursor-pointer text-caixaAzul focus:outline-none" >
                                 <i class="fas fa-chevron-down md:mr-2" x-bind:class="{ 'hidden': !exibirLinhasFilhas{{ $macroitem->id }} }" x-show="!exibirLinhasFilhas{{ $macroitem->id }}"></i>
@@ -154,4 +157,13 @@
         </tbody>
     </table>
 </div>
+@push('scripts')
+    <script>
 
+    $('.popup-link-guia').magnificPopup({
+    type: 'iframe'
+    // other options
+    });
+
+    </script>
+@endpush

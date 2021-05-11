@@ -18,7 +18,9 @@
         <script src="{{ asset('js/app.js') }}"></script>
     </head>
     <body class="bg-[#FCFCFC] h-teladisponivel">
-        @include('layouts.header')
+        @if(!isset($modal) || !$modal) 
+            @include('layouts.header')
+        @endif
         <main class="h-full mt-16">
             @yield('content')
         </main>
